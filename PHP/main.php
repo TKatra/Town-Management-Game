@@ -20,4 +20,5 @@ $town->setEducation(-1342342);
 $town->setMilitary(-32498);
 $town->setPopulation(-2344);
 var_dump($town);
+echo "<br>";
 ?>
