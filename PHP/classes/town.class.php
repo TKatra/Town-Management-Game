@@ -1,17 +1,17 @@
 <?php
 class Town
 {
-	protected $townName;
+	protected $name;
 	protected $food;
 	protected $happiness;
 	protected $money;
 	protected $education;
 	protected $military;
-	protected $population = 0;
+	protected $population;
 
-	public function getTownName()
+	public function getName()
 	{
-		return $this->townName;
+		return $this->name;
 	}
 	public function getFood()
 	{
@@ -35,7 +35,7 @@ class Town
 	}
 	public function getPopulation()
 	{
-		return $this->populaiton;
+		return $this->population;
 	}
 
 	public function setFood($food)
@@ -98,16 +98,16 @@ class Town
 		}
 		$this->military = $military;
 	}
-	public function setPopulation($populaiton)
+	public function setPopulation($population)
 	{
-		if($populaiton > 100)
+		if($population > 100)
 		{
-			$populaiton = 100;
+			$population = 100;
 		}
-		else if($populaiton < 0)
+		else if($population < 0)
 		{
-			$populaiton = 0;
+			$population = 0;
 		}
-		$this->populaiton = $populaiton;
+		$this->population = $population;
 	}
 }
