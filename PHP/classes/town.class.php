@@ -1,13 +1,13 @@
 <?php
 class Town
 {
-	$townName;
-	$food;
-	$happiness;
-	$money;
-	$education;
-	$military;
-	$population = 0;
+	protected $townName;
+	protected $food;
+	protected $happiness;
+	protected $money;
+	protected $education;
+	protected $military;
+	protected $population = 0;
 
 	public function getTownName()
 	{
