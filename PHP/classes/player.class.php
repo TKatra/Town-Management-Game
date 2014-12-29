@@ -1,9 +1,9 @@
 <?php
 class Player
 {
-	protected $name;
-	protected $town;
-	protected $toolCards;
+	protected $name; //string
+	protected $town; //town
+	protected $toolCards; //array of ToolCards
 
 	public function __construct($name, $town)
 	{

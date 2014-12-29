@@ -1,14 +1,14 @@
 <?php
 class Town
 {
-	protected $name;
-	protected $type;
-	protected $food;
-	protected $happiness;
-	protected $money;
-	protected $education;
-	protected $military;
-	protected $population;
+	protected $name; //string
+	protected $type; //string
+	protected $food; //int
+	protected $happiness; //int
+	protected $money; //int
+	protected $education; //int
+	protected $military; //int
+	protected $population; //int
 
 	public function __construct($name, $type)
 	{

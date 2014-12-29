@@ -1,8 +1,8 @@
 <?php
 class Card
 {
-	protected $title;
-	protected $description;
+	protected $title; //string
+	protected $description; //string
 
 	public function getTitle()
 	{
