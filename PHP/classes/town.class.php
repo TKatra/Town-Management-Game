@@ -2,6 +2,7 @@
 class Town
 {
 	protected $name;
+	protected $type;
 	protected $food;
 	protected $happiness;
 	protected $money;
@@ -9,9 +10,32 @@ class Town
 	protected $military;
 	protected $population;
 
+	public function __construct($name, $type)
+	{
+		$this->name = $name;
+		$this->type = $type;
+		
+		$this->food = 0;
+		$this->happiness = 0;
+		$this->money = 0;
+		$this->education = 0;
+		$this->military = 0;
+		$this->population = 0;
+		// $this->food = 30;
+		// $this->happiness = 10;
+		// $this->money = 40;
+		// $this->education = 20;
+		// $this->military = 50;
+		// $this->population = 0;
+	}
+
 	public function getName()
 	{
 		return $this->name;
+	}
+	public function getType()
+	{
+		return $this->type;
 	}
 	public function getFood()
 	{
