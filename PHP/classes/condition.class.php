@@ -6,17 +6,26 @@ class Condition
 	protected $winValue; //int
 	protected $loseValue; //int
 
+//om databaskall returnerar associativa arrayer mata in en sån i construktor
 	public function __construct()
 	{
 		
 	}
 
-	public function getType()
+	public function getWinType()
 	{
-		return $this->type;
+		return $this->winType;
 	}
-	public function getValue()
+	public function getLoseType()
 	{
-		return $this->value;
+		return $this->loseType;
+	}
+	public function getWinValue()
+	{
+		return $this->winValue;
+	}
+	public function getLoseValue()
+	{
+		return $this->loseValue;
 	}
 }
