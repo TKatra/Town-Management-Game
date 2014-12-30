@@ -30,5 +30,10 @@ $testArray = array(
 	"QWERTY" => 1234567
 	);
 var_dump($testArray);
-// foreach ()
+echo "<br/>";
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
 ?>
