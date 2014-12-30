@@ -2,9 +2,9 @@
 class ToolCard extends Card
 {
 	protected $targetSelf; //bool
-	protected $cost; //associativ array (Food = -20)
-	protected $selfEffect; //associativ array (Food => 20)
-	protected $opponentEffect; //associativ array
+	protected $cost; //Effect
+	protected $selfEffect; //Effect
+	protected $opponentEffect; //Effect
 
 
 

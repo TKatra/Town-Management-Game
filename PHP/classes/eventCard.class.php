@@ -1,9 +1,9 @@
 <?php
 class EventCard extends Card
 {
-	protected $winCondition; //
-	protected $loseCondition; //
-	protected $winEffect; //associativ array
-	protected $loseEffect; //associativ array
-	protected $startupEffect; //associativ array
+	protected $winCondition; //Condition
+	protected $loseCondition; //Condition
+	protected $winEffect; //Effect
+	protected $loseEffect; //Effect
+	protected $startupEffect; //Effect
 }
