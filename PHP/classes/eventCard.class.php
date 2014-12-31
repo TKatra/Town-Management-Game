@@ -7,6 +7,15 @@ class EventCard extends Card
 	protected $loseEffect; //Effect
 	protected $startupEffect; //Effect
 
+	public function __construct($cardDetails)
+	{
+		$this->winCondition = new Condition($cardDetails["winCondition"]);
+		$this->loseCondition = new Condition($cardDetails["loseCondition"]);
+		$this->winEffect = new Effect($cardDetails["winEffect"]);
+		$this->loseEffect = new Effect($cardDetails["loseEffect"]);
+		$this->startupEffect = new Effect($cardDetails["startupEffect"]);
+	}
+
 	public getWinCondition()
 	{
 		return $this->winCondition;
