@@ -6,7 +6,13 @@ class ToolCard extends Card
 	protected $selfEffect; //Effect
 	protected $opponentEffect; //Effect
 
-
+	public function __construct($cardDetails)
+	{
+		$this->targetSelf = $cardDetails["targetSelf"];
+		$this->cost = new Effect($cardDetails["cost"]);
+		$this->selfEffect = new Effect($cardDetails["selfEffect"]);
+		$this->opponentEffect = new Effect($cardDetails["opponentEffect"]);
+	}
 
 	public function getTargetSelf()
 	{
@@ -18,7 +24,7 @@ class ToolCard extends Card
 	}
 	public function getSelfEffect()
 	{
-		return $this->targetSelf;
+		return $this->selfEffect;
 	}
 	public function getOpponentEffect()
 	{
