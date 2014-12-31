@@ -10,7 +10,7 @@ class Effect
 
 	public function __construct($effectDetails) 
 	{
-		foreach($effectDetails as $key => $value)
+		foreach($effectDetails as $key)
 		{
 			if($effectDetails[$key] > 100)
 			{
