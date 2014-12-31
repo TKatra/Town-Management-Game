@@ -36,4 +36,24 @@ foreach ($testArray as $key => $value)
 	echo("[".$key."] = ".$value);
 	echo "<br/>";
 }
+echo "<hr/>";
+
+$testArray = array(
+	"food" => 30,
+	"happiness" => 20,
+	"money" => 10,
+	"education" => 40,
+	"military" => 50,
+	"population" => 20
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testEffect = new Effect($testArray);
+var_dump($testEffect);
+echo "<hr/>";
+
 ?>
