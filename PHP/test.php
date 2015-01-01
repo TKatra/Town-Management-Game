@@ -176,7 +176,7 @@ echo "<hr/>";
 
 $testArray = array(
 	"conditionType" => "lowestOfPlayers",
-	"statsType" => "population",
+	"statsType" => "food",
 	"value" => -54
 	);
 foreach ($testArray as $key => $value)
@@ -188,6 +188,95 @@ foreach ($testArray as $key => $value)
 $testCondition = new Condition($testArray);
 var_dump($testCondition);
 echo "<hr/>";
+echo "TEST TOOL CARD CLASS";
+echo "<hr/>";
 
+$testArray = array(
+	"title" => "Tool Card of DOOM",
+	"description" => "A card that tests the tests of testing tests in this test.",
+	"targetSelf" => true,
+	"costEffect" => array(
+		"food" => 3,
+		"happiness" => 54,
+		"money" => 45676,
+		"education" => -234,
+		"military" => 26,
+		"population" => 32
+		),
+	"selfEffect" => array(
+		"food" => 67,
+		"happiness" => 51,
+		"money" => 76,
+		"education" => -62,
+		"military" => 12,
+		"population" => 75
+		),
+	"opponentEffect" => array(
+		"food" => -234,
+		"happiness" => 1,
+		"money" => 65,
+		"education" => -3456,
+		"military" => 23435,
+		"population" => 9
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
 
+$testToolCard = new ToolCard($testArray);
+var_dump($testToolCard);
+echo "<hr/>";
+echo "TEST EVENT CARD CLASS";
+echo "<hr/>";
+
+$testArray = array(
+	"title" => "Event Card that will shatter the world and stuff",
+	"description" => "Another card sdöoifsfanfseoifhnsfoisnhfpaosifd.",
+	"winCondition" => array(
+		"conditionType" => "highestOfPlayers",
+		"statsType" => "food",
+		"value" => 0
+		),
+	"loseCondition" => array(
+		"conditionType" => "lowestOfPlayers",
+		"statsType" => "food",
+		"value" => 0
+		),
+	"winEffect" => array(
+		"food" => 3,
+		"happiness" => 54,
+		"money" => 45676,
+		"education" => -234,
+		"military" => 26,
+		"population" => 32
+		),
+	"loseEffect" => array(
+		"food" => 67,
+		"happiness" => 51,
+		"money" => 76,
+		"education" => -62,
+		"military" => 12,
+		"population" => 75
+		),
+	"startupEffect" => array(
+		"food" => -234,
+		"happiness" => 1,
+		"money" => 65,
+		"education" => -3456,
+		"military" => 23435,
+		"population" => 9
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testEventCard = new EventCard($testArray);
+var_dump($testEventCard);
+echo "<hr/>";
 ?>
