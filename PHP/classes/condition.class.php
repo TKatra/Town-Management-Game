@@ -4,10 +4,8 @@ class Condition
 	protected $conditionType; //string
 	protected $statsType; //string
 	protected $value; //int
-	
 
-//om databaskall returnerar associativa arrayer mata in en sån i construktor
-	public function __construct($conditionDetails) 
+	public function __construct($conditionDetails) //associative array
 	{
 		//highestOfPlayers
 		//lowestOfPlayers
@@ -75,8 +73,6 @@ class Condition
 			case "education":
 				break;
 			case "military":
-				break;
-			case "population":
 				break;
 			default:
 				throw new Exception("'".$statsType."' is an incorrect stats type!");				
