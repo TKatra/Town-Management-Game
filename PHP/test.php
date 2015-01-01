@@ -92,5 +92,95 @@ foreach ($testArray as $key => $value)
 var_dump($testEffect);
 echo "<hr/>";
 
+$testArray = array(
+	"conditionType" => "highestOfPlayers",
+	"statsType" => "food",
+	"value" => 25
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
+$testArray = array(
+	"conditionType" => "lowestOfPlayers",
+	"statsType" => "happiness",
+	"value" => 23454423
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
+$testArray = array(
+	"conditionType" => "moreThanValue",
+	"statsType" => "money",
+	"value" => -3467
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
+$testArray = array(
+	"conditionType" => "lessThanValue",
+	"statsType" => "education",
+	"value" => 0
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
+$testArray = array(
+	"conditionType" => "highestOfPlayers",
+	"statsType" => "military",
+	"value" => "65"
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
+$testArray = array(
+	"conditionType" => "lowestOfPlayers",
+	"statsType" => "population",
+	"value" => -54
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testCondition = new Condition($testArray);
+var_dump($testCondition);
+echo "<hr/>";
+
 
 ?>
