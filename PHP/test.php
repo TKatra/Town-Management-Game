@@ -22,6 +22,9 @@ include_once("../libs/nodebite-swiss-army-oop.php");
 // var_dump($town);
 // echo "<br>";
 
+echo "TEST LOOPING THROUGH ACCOSIATIVE ARRAY";
+echo "<hr/>";
+
 $testArray = array(
 	1 => "dfgrdse",
 	"super" => "Man",
@@ -36,6 +39,8 @@ foreach ($testArray as $key => $value)
 	echo("[".$key."] = ".$value);
 	echo "<br/>";
 }
+echo "<hr/>";
+echo "TEST EFFECT CLASS";
 echo "<hr/>";
 
 $testArray = array(
@@ -90,6 +95,8 @@ foreach ($testArray as $key => $value)
 	echo "<br/>";
 }
 var_dump($testEffect);
+echo "<hr/>";
+echo "TEST CONDITION CLASS";
 echo "<hr/>";
 
 $testArray = array(
