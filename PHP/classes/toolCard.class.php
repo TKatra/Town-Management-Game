@@ -6,8 +6,10 @@ class ToolCard extends Card
 	protected $selfEffect; //Effect
 	protected $opponentEffect; //Effect
 
-	public function __construct($cardDetails)
+	public function __construct($cardDetails) //associative array
 	{
+		$this->title = $cardDetails["title"];
+		$this->description = $cardDetails["description"];
 		$this->targetSelf = $cardDetails["targetSelf"];
 		$this->costEffect = new Effect($cardDetails["costEffect"]);
 		$this->selfEffect = new Effect($cardDetails["selfEffect"]);
