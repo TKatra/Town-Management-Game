@@ -21,12 +21,6 @@ class Town
 		$this->education = 0;
 		$this->military = 0;
 		$this->population = 0;
-		// $this->food = 30;
-		// $this->happiness = 10;
-		// $this->money = 40;
-		// $this->education = 20;
-		// $this->military = 50;
-		// $this->population = 0;
 	}
 
 	public function getName()
