@@ -10,7 +10,7 @@ class Town
 	protected $military; //int
 	protected $population; //int
 
-	public function __construct($name, $type)
+	public function __construct($name, $type) //string, string 
 	{
 		$this->name = $name;
 		$this->type = $type;
@@ -128,4 +128,6 @@ class Town
 		}
 		$this->population = $population;
 	}
+
+
 }

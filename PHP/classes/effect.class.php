@@ -8,7 +8,7 @@ class Effect
 	protected $military; //int
 	protected $population; //int
 
-	public function __construct($effectDetails) 
+	public function __construct($effectDetails) //associative array
 	{
 		foreach($effectDetails as $key => $value)
 		{
