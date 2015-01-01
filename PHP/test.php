@@ -1,27 +1,6 @@
 <?php
 include_once("../libs/nodebite-swiss-army-oop.php");
 
-// $town = new SmallVillage("Small Town");
-
-// var_dump($town);
-// echo "<br>Set too high values<br>";
-// $town->setFood(256);
-// $town->setHappiness(1452);
-// $town->setMoney(55555);
-// $town->setEducation(1342342);
-// $town->setMilitary(32498);
-// $town->setPopulation(2344);
-// var_dump($town);
-// echo "<br>Set too low values<br>";
-// $town->setFood(-256);
-// $town->setHappiness(-1452);
-// $town->setMoney(-55555);
-// $town->setEducation(-1342342);
-// $town->setMilitary(-32498);
-// $town->setPopulation(-2344);
-// var_dump($town);
-// echo "<br>";
-
 echo "TEST LOOPING THROUGH ACCOSIATIVE ARRAY";
 echo "<hr/>";
 
@@ -278,5 +257,42 @@ foreach ($testArray as $key => $value)
 
 $testEventCard = new EventCard($testArray);
 var_dump($testEventCard);
+echo "<hr/>";
+echo "TEST TOWN CLASS";
+echo "<hr/>";
+
+$testArray = array(
+	"name" => "Test Town",
+	"type" => "Farming village",
+	"food" => 50,
+	"happiness" => 40,
+	"money" => 30,
+	"education" => 10,
+	"military" => 20
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testTown = new Town($testArray);
+var_dump($testTown);
+echo "<hr/>";
+$testTown->setFood(213789);
+$testTown->setHappiness(555);
+$testTown->setMoney(1235);
+$testTown->setEducation(875);
+$testTown->setMilitary(436);
+$testTown->setPopulation(334);
+var_dump($testTown);
+echo "<hr/>";
+$testTown->setFood(-213789);
+$testTown->setHappiness(-555);
+$testTown->setMoney(-1235);
+$testTown->setEducation(-875);
+$testTown->setMilitary(-436);
+$testTown->setPopulation(-334);
+var_dump($testTown);
 echo "<hr/>";
 ?>
