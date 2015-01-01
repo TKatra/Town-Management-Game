@@ -10,17 +10,16 @@ class Town
 	protected $military; //int
 	protected $population; //int
 
-	public function __construct($name, $type) //string, string 
+	public function __construct($townDetails) //associative array 
 	{
-		$this->name = $name;
-		$this->type = $type;
-		
-		$this->food = 0;
-		$this->happiness = 0;
-		$this->money = 0;
-		$this->education = 0;
-		$this->military = 0;
-		$this->population = 0;
+		$this->name = $townDetails["name"];
+		$this->type = $townDetails["type"];
+		$this->food = (int)$townDetails["food"];
+		$this->happiness = (int)$townDetails["happiness"];
+		$this->money = (int)$townDetails["money"];
+		$this->education = (int)$townDetails["education"];
+		$this->military = (int)$townDetails["military"];
+		$this->population = (int)$townDetails["population"];
 	}
 
 	public function getName()
@@ -58,76 +57,39 @@ class Town
 
 	public function setFood($food)
 	{
-		if($food > 100)
-		{
-			$food = 100;
-		}
-		else if($food < 0)
-		{
-			$food = 0;
-		}
-		$this->food = $food;
+		$this->food = $this->numberLimiter($food);
 	}
 	public function setHappiness($happiness)
 	{
-		if($happiness > 100)
-		{
-			$happiness = 100;
-		}
-		else if($happiness < 0)
-		{
-			$happiness = 0;
-		}
-		$this->happiness = $happiness;
+		$this->happiness = $this->numberLimiter($happiness);
 	}
 	public function setMoney($money)
 	{
-		if($money > 100)
-		{
-			$money = 100;
-		}
-		else if($money < 0)
-		{
-			$money = 0;
-		}
-		$this->money = $money;
+		$this->money = $this->numberLimiter($money);
 	}
 	public function setEducation($education)
 	{
-		if($education > 100)
-		{
-			$education = 100;
-		}
-		else if($education < 0)
-		{
-			$education = 0;
-		}
-		$this->education = $education;
+		$this->education = $this->numberLimiter($education);
 	}
 	public function setMilitary($military)
 	{
-		if($military > 100)
-		{
-			$military = 100;
-		}
-		else if($military < 0)
-		{
-			$military = 0;
-		}
-		$this->military = $military;
+		$this->military = $this->numberLimiter($military);
 	}
 	public function setPopulation($population)
 	{
-		if($population > 100)
-		{
-			$population = 100;
-		}
-		else if($population < 0)
-		{
-			$population = 0;
-		}
-		$this->population = $population;
+		$this->population = $this->numberLimiter($population);
 	}
 
-
+	protected function numberLimiter($number)
+	{
+		if($number > 100)
+		{
+			$number = 100;
+		}
+		else if($number < 0)
+		{
+			$number = 0;
+		}
+		return $number;
+	}
 }
