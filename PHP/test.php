@@ -213,7 +213,7 @@ echo "<hr/>";
 
 $testArray = array(
 	"title" => "Event Card that will shatter the world and stuff",
-	"description" => "Another card sdöoifsfanfseoifhnsfoisnhfpaosifd.",
+	"description" => "Another card sdsduyfgsuyfgsuyfgsusdfuygsdf.",
 	"winCondition" => array(
 		"conditionType" => "highestOfPlayers",
 		"statsType" => "food",
