@@ -3,8 +3,8 @@ class Player
 {
 	protected $name; //string 
 	protected $town; //town
-	protected $toolCards; //array of ToolCards
-	protected $discardedToolCards; //array of discarded ToolCards
+	protected $toolCards = array(); //array of ToolCards
+	protected $discardPile = array(); //array of discarded ToolCards
 
 	public function __construct($name, $town) //string, Town 
 	{
@@ -24,17 +24,58 @@ class Player
 	{
 		return $this->toolCards;
 	}
-	public function getDiscardedToolCards()
+	public function getDiscardPile()
 	{
-		return $this->discardedToolCards;
+		return $this->discardPile;
 	}
 
-	public function setToolCards($toolCards)
+	public function addToolCards($toolCards)
 	{
-		$this->toolCards = $toolCards;
+		// $this->toolCards = $toolCards;
+		for ($i = 0; $i < count($toolCards); $i++) 
+		{
+			$this->toolCards[] = $toolCards[$i];
+		}
 	}
-	public function setDiscardedToolCards($discardedToolCards)
+
+	public function clearDiscardPile()
 	{
-		$this->discardedToolCards = $discardedToolCards;
+		$this->discardPile = array();
+	}
+
+	protected function canAffordCard($costEffect)
+	{
+		
+	}
+
+	public function useToolCard($index, $opponent = null)
+	{
+		if (count($this->toolCards) != 0)
+		{
+			if(!($index < 0) || !($index >= (count($this->toolCards) -1)))
+			{
+				$toolCard = $this->toolCards[$index];
+
+				if ()
+				// return $toolCard;
+				if ($toolCard->targetSelf == true)
+				{
+
+				}
+				else
+				{
+
+				}
+			}
+			else
+			{
+				throw new Exception("'".(int)$index."' is an invalid index.");
+			}
+		}
+		else 
+		{
+			throw new Exception("The 'toolCards' array is empty.");
+			// return "The 'toolCards' array is empty.";
+		}
 	}
 }
