@@ -1,6 +1,6 @@
 <?php
 include_once("../libs/nodebite-swiss-army-oop.php");
-
+//////////////////////////////////////////////////////
 echo "TEST LOOPING THROUGH ACCOSIATIVE ARRAY";
 echo "<hr/>";
 
@@ -19,6 +19,7 @@ foreach ($testArray as $key => $value)
 	echo "<br/>";
 }
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST EFFECT CLASS";
 echo "<hr/>";
 
@@ -75,6 +76,7 @@ foreach ($testArray as $key => $value)
 }
 var_dump($testEffect);
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST CONDITION CLASS";
 echo "<hr/>";
 
@@ -167,6 +169,7 @@ foreach ($testArray as $key => $value)
 $testCondition = new Condition($testArray);
 var_dump($testCondition);
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST TOOL CARD CLASS";
 echo "<hr/>";
 
@@ -208,6 +211,7 @@ foreach ($testArray as $key => $value)
 $testToolCard = new ToolCard($testArray);
 var_dump($testToolCard);
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST EVENT CARD CLASS";
 echo "<hr/>";
 
@@ -258,6 +262,7 @@ foreach ($testArray as $key => $value)
 $testEventCard = new EventCard($testArray);
 var_dump($testEventCard);
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST TOWN CLASS";
 echo "<hr/>";
 
@@ -295,4 +300,226 @@ $testTown->setMilitary(-436);
 $testTown->setPopulation(-334);
 var_dump($testTown);
 echo "<hr/>";
+//////////////////////////////////////////////////////
+echo "TEST PLAYER CLASS";
+echo "<hr/>";
+
+$testArray = array(
+	"name" => "Hiero's Town",
+	"type" => "Farming village",
+	"food" => 50,
+	"happiness" => 40,
+	"money" => 30,
+	"education" => 10,
+	"military" => 20
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testTown = new Town($testArray);
+
+$testArray = array(
+	"title" => "Unleash bookie monster",
+	"description" => "Our hunters have captured a bookie monster. We can unleash it on one of our neighbours and have it eat their books.",
+	"targetSelf" => false,
+	"costEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => -30,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+
+$toolCardsArray = array();
+$toolCardsArray[] = $testToolCard;
+
+$testArray = array(
+	"title" => "Sell food for money",
+	"description" => "A merchant visiting our town want to buy some food from us and give us money in return.",
+	"targetSelf" => true,
+	"costEffect" => array(
+		"food" => -20,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 20,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+$toolCardsArray[] = $testToolCard;
+
+$testArray = array(
+	"title" => "Burglar for hire",
+	"description" => "There is a burglar that say he can steal money from one of our neighbours and bring some of it to you.",
+	"targetSelf" => false,
+	"costEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => -10,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 30,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => -30,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+$toolCardsArray[] = $testToolCard;
+
+$testArray = array(
+	"title" => "Saboteur",
+	"description" => "A man says that he can break things in a neighbouring town for you, if the pay is right.",
+	"targetSelf" => false,
+	"costEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => -40,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+$toolCardsArray[] = $testToolCard;
+
+$testArray = array(
+	"title" => "Festival",
+	"description" => "We have the possibility to have a festival in our town. That should make the citizens happier.",
+	"targetSelf" => true,
+	"costEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => -30,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 40,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+$toolCardsArray[] = $testToolCard;
+
+$testPlayer = new Player("Hiero", $testTown);
+var_dump($testPlayer);
+var_dump($toolCardsArray);
+$testPlayer->addToolCards($toolCardsArray);
+var_dump($testPlayer);
+
+echo "<hr/>";
+$testPlayer->useToolCard(4);
+// var_dump($testCard);
 ?>
