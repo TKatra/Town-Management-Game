@@ -513,6 +513,44 @@ foreach ($testArray as $key => $value)
 $testToolCard = new ToolCard($testArray);
 $toolCardsArray[] = $testToolCard;
 
+$testArray = array(
+	"title" => "Stupid card",
+	"description" => "This card is supposed to be broken to test if players can afford this, wich they should not.",
+	"targetSelf" => true,
+	"costEffect" => array(
+		"food" => -100,
+		"happiness" => -100,
+		"money" => -300,
+		"education" => -670,
+		"military" => -430,
+		"population" => -570
+		),
+	"selfEffect" => array(
+		"food" => 0,
+		"happiness" => 40,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		),
+	"opponentEffect" => array(
+		"food" => 0,
+		"happiness" => 0,
+		"money" => 0,
+		"education" => 0,
+		"military" => 0,
+		"population" => 0
+		)
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testToolCard = new ToolCard($testArray);
+$toolCardsArray[] = $testToolCard;
+
 $testPlayer = new Player("Hiero", $testTown);
 var_dump($testPlayer);
 var_dump($toolCardsArray);
@@ -520,6 +558,30 @@ $testPlayer->addToolCards($toolCardsArray);
 var_dump($testPlayer);
 
 echo "<hr/>";
-$testPlayer->useToolCard(4);
-// var_dump($testCard);
+echo "TEST USING TOOL CARDS";
+echo "<hr/>";
+echo($testPlayer->useToolCard(4));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
+echo($testPlayer->useToolCard(5));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
+echo($testPlayer->useToolCard(2));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
+echo($testPlayer->useToolCard(1));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
+echo($testPlayer->useToolCard(0));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
+echo($testPlayer->useToolCard(3));
+echo "<br/>";
+var_dump($testPlayer->getTown());
+echo "<hr/>";
 ?>
