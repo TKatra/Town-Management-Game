@@ -74,6 +74,8 @@ class Condition
 				break;
 			case "military":
 				break;
+			case "population":
+				break;
 			default:
 				throw new Exception("'".$statsType."' is an incorrect stats type!");				
 				break;
