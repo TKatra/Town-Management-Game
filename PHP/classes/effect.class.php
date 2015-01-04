@@ -7,27 +7,43 @@ class Effect
 	protected $education; //int
 	protected $military; //int
 	protected $population; //int
+	protected $cardsToRemove; //int
 
 	public function __construct($effectDetails) //associative array
 	{
 		foreach($effectDetails as $key => $value)
 		{
-			if($effectDetails[$key] > 100)
+			if($key != "cardsToRemove")
 			{
-				$effectDetails[$key] = 100;
+				if($effectDetails[$key] > 100)
+				{
+					$effectDetails[$key] = 100;
+				}
+				else if($effectDetails[$key] < -100)
+				{
+					$effectDetails[$key] = -100;
+				}
 			}
-			else if($effectDetails[$key] < -100)
+			else
 			{
-				$effectDetails[$key] = -100;
+				if($effectDetails[$key] > 5)
+				{
+					$effectDetails[$key] = 5;
+				}
+				else if($effectDetails[$key] < 0)
+				{
+					$effectDetails[$key] = 0;
+				}
 			}
 		}
 
-		$this->food = $effectDetails["food"];
-		$this->happiness = $effectDetails["happiness"];
-		$this->money = $effectDetails["money"];
-		$this->education = $effectDetails["education"];
-		$this->military = $effectDetails["military"];
-		$this->population = $effectDetails["population"];
+		$this->food = (int)$effectDetails["food"];
+		$this->happiness = (int)$effectDetails["happiness"];
+		$this->money = (int)$effectDetails["money"];
+		$this->education = (int)$effectDetails["education"];
+		$this->military = (int)$effectDetails["military"];
+		$this->population = (int)$effectDetails["population"];
+		$this->cardsToRemove = (int)$effectDetails["cardsToRemove"];
 	}
 
 	public function getFood()
@@ -53,5 +69,9 @@ class Effect
 	public function getPopulation()
 	{
 		return $this->population;
+	}
+	public function getCardsToRemove()
+	{
+		return $this->cardsToRemove;
 	}
 }
