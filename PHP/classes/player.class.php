@@ -98,14 +98,42 @@ class Player
 		}
 	}
 
-	protected function activateEffect($effect, $town)
+	protected function activateEffect($effect, $targetedPlayer = null)
 	{
-		$town->setFood($town->getFood() + $effect->getFood());
-		$town->setHappiness($town->getHappiness() + $effect->getHappiness());
-		$town->setMoney($town->getMoney() + $effect->getMoney());
-		$town->setEducation($town->getEducation() + $effect->getEducation());
-		$town->setMilitary($town->getMilitary() + $effect->getMilitary());
-		$town->setPopulation($town->getPopulation() + $effect->getPopulation());
+		if($targetedPlayer != null)
+		{
+			$targetedPlayer->town->setFood($targetedPlayer->town->getFood() + $effect->getFood());
+			$targetedPlayer->town->setHappiness($targetedPlayer->town->getHappiness() + $effect->getHappiness());
+			$targetedPlayer->town->setMoney($targetedPlayer->town->getMoney() + $effect->getMoney());
+			$targetedPlayer->town->setEducation($targetedPlayer->town->getEducation() + $effect->getEducation());
+			$targetedPlayer->town->setMilitary($targetedPlayer->town->getMilitary() + $effect->getMilitary());
+			$targetedPlayer->town->setPopulation($targetedPlayer->town->getPopulation() + $effect->getPopulation());
+
+			if($effect->getCardsToRemove() > 0)
+			{
+				for($i = 0; $i < $effect->getCardsToRemove(); $i++)
+				{
+					$targetedPlayer->discardCard(mt_rand(0, (count($targetedPlayer->toolCards) - 1)));
+				}
+			}
+		}
+		else
+		{
+			$this->town->setFood($this->town->getFood() + $effect->getFood());
+			$this->town->setHappiness($this->town->getHappiness() + $effect->getHappiness());
+			$this->town->setMoney($this->town->getMoney() + $effect->getMoney());
+			$this->town->setEducation($this->town->getEducation() + $effect->getEducation());
+			$this->town->setMilitary($this->town->getMilitary() + $effect->getMilitary());
+			$this->town->setPopulation($this->town->getPopulation() + $effect->getPopulation());
+
+			if($effect->getCardsToRemove() > 0)
+			{
+				for($i = 0; $i < $effect->getCardsToRemove(); $i++)
+				{
+					$this->discardCard(mt_rand(0, (count($this->toolCards) - 1)));
+				}
+			}
+		}
 	}
 
 	public function useToolCard($index, $opponent = null)
@@ -117,20 +145,20 @@ class Player
 			{
 				if ($toolCard->getTargetSelf() == true)
 				{
-					$this->activateEffect($toolCard->getCostEffect(), $this->town);
-					$this->activateEffect($toolCard->getSelfEffect(), $this->town);
+					$this->activateEffect($toolCard->getCostEffect());
+					$this->activateEffect($toolCard->getSelfEffect());
 
-					$this->discardCard($index);
+					$this->discardCard(array_search($toolCard, $this->toolCards));
 				}
 				else 
 				{
 					if (is_a($opponent, "Player") || is_subclass_of($opponent, "Player"))
 					{
-						$this->activateEffect($toolCard->getCostEffect(), $this->town);
-						$this->activateEffect($toolCard->getSelfEffect(), $this->town);
-						$this->activateEffect($toolCard->getOpponentEffect(), $opponent->town);
+						$this->activateEffect($toolCard->getCostEffect());
+						$this->activateEffect($toolCard->getSelfEffect());
+						$this->activateEffect($toolCard->getOpponentEffect(), $opponent);
 
-						$this->discardCard($index);
+						$this->discardCard(array_search($toolCard, $this->toolCards));
 					}
 					else
 					{
