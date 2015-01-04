@@ -183,7 +183,8 @@ $testArray = array(
 		"money" => 45676,
 		"education" => -234,
 		"military" => 26,
-		"population" => 32
+		"population" => 32,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 67,
@@ -191,7 +192,8 @@ $testArray = array(
 		"money" => 76,
 		"education" => -62,
 		"military" => 12,
-		"population" => 75
+		"population" => 75,
+		"cardsToRemove" => 0
 		),
 	"opponentEffect" => array(
 		"food" => -234,
@@ -199,7 +201,8 @@ $testArray = array(
 		"money" => 65,
 		"education" => -3456,
 		"military" => 23435,
-		"population" => 9
+		"population" => 9,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -234,7 +237,8 @@ $testArray = array(
 		"money" => 45676,
 		"education" => -234,
 		"military" => 26,
-		"population" => 32
+		"population" => 32,
+		"cardsToRemove" => 0
 		),
 	"loseEffect" => array(
 		"food" => 67,
@@ -242,7 +246,8 @@ $testArray = array(
 		"money" => 76,
 		"education" => -62,
 		"military" => 12,
-		"population" => 75
+		"population" => 75,
+		"cardsToRemove" => 0
 		),
 	"startupEffect" => array(
 		"food" => -234,
@@ -250,7 +255,8 @@ $testArray = array(
 		"money" => 65,
 		"education" => -3456,
 		"military" => 23435,
-		"population" => 9
+		"population" => 9,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -331,7 +337,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -339,7 +346,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -347,7 +355,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => -30,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -371,7 +380,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -379,7 +389,8 @@ $testArray = array(
 		"money" => 20,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -387,7 +398,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -409,7 +421,8 @@ $testArray = array(
 		"money" => -10,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -417,7 +430,8 @@ $testArray = array(
 		"money" => 30,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -425,7 +439,8 @@ $testArray = array(
 		"money" => -30,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -447,7 +462,8 @@ $testArray = array(
 		"money" => -40,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -455,7 +471,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 1
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -463,7 +480,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 1
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -485,7 +503,8 @@ $testArray = array(
 		"money" => -30,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -493,7 +512,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -501,7 +521,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 0
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -523,7 +544,8 @@ $testArray = array(
 		"money" => -300,
 		"education" => -670,
 		"military" => -430,
-		"population" => -570
+		"population" => -570,
+		"cardsToRemove" => 1450
 		),
 	"selfEffect" => array(
 		"food" => 0,
@@ -531,7 +553,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => -4560
 		),
 	"opponentEffect" => array(
 		"food" => 0,
@@ -539,7 +562,8 @@ $testArray = array(
 		"money" => 0,
 		"education" => 0,
 		"military" => 0,
-		"population" => 0
+		"population" => 0,
+		"cardsToRemove" => 4
 		)
 	);
 foreach ($testArray as $key => $value)
@@ -837,8 +861,91 @@ echo "<hr/>";
 echo "TEST REMOTE CARD REMOVING";
 echo "<hr/>";
 
+$testPlayer->getTown()->setMoney(100);
+$testArray = $testPlayer->getToolCards();
 
+echo ($testPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($testPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+$testArray = $otherPlayer->getToolCards();
+
+echo ($otherPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($otherPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $otherPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+var_dump($testPlayer->getTown());
+var_dump($otherPlayer->getTown());
 
 echo "<hr/>";
+// $otherPlayer->discardCard(2);
+$testPlayer->useToolCard(3, $otherPlayer);
+
+$testArray = $testPlayer->getToolCards();
+
+echo ($testPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($testPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+$testArray = $otherPlayer->getToolCards();
+
+echo ($otherPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($otherPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $otherPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+var_dump($testPlayer->getTown());
+var_dump($otherPlayer->getTown());
 
 ?>
