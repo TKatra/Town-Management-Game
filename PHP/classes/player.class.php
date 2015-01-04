@@ -38,6 +38,15 @@ class Player
 		}
 	}
 
+	public function discardCard($index)
+	{
+		if ($this->cardExists($index) == true)
+		{
+			$this->discardPile[] = $this->toolCards[$index];
+			unset($this->toolCards[$index]);
+			$this->toolCards = array_values($this->toolCards);
+		}
+	}
 	public function clearDiscardPile()
 	{
 		$this->discardPile = array();
@@ -70,11 +79,11 @@ class Player
 		return false;
 	}
 
-	protected function canUseToolCard($index)
+	protected function cardExists($index)
 	{
 		if (count($this->toolCards) != 0)
 		{
-			if(!($index < 0) || !($index >= (count($this->toolCards) -1)))
+			if(!($index < 0) && !($index > (count($this->toolCards) - 1)))
 			{
 				return true;
 			}
@@ -101,16 +110,17 @@ class Player
 
 	public function useToolCard($index, $opponent = null)
 	{
-		if ($this->canUseToolCard($index) == true)
+		if ($this->cardExists($index) == true)
 		{
 			$toolCard = $this->toolCards[$index];
-
 			if($this->canAffordToolCard($toolCard) == true)
 			{
 				if ($toolCard->getTargetSelf() == true)
 				{
 					$this->activateEffect($toolCard->getCostEffect(), $this->town);
 					$this->activateEffect($toolCard->getSelfEffect(), $this->town);
+
+					$this->discardCard($index);
 				}
 				else 
 				{
@@ -118,19 +128,19 @@ class Player
 					{
 						$this->activateEffect($toolCard->getCostEffect(), $this->town);
 						$this->activateEffect($toolCard->getSelfEffect(), $this->town);
-						$this->activateEffect($toolCard->getSelfEffect(), $opponent->town);
+						$this->activateEffect($toolCard->getOpponentEffect(), $opponent->town);
+
+						$this->discardCard($index);
 					}
 					else
 					{
-						return "No target selected";
-						//maybe exception
+						throw new Exception("No target selected");
 					}
 				}
 			}
 			else
 			{
-				return "Can't afford the card";
-				//maybe exception
+				throw new Exception("Can't afford the card");
 			}
 		}
 	}
