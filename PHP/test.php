@@ -558,30 +558,287 @@ $testPlayer->addToolCards($toolCardsArray);
 var_dump($testPlayer);
 
 echo "<hr/>";
+//////////////////////////////////////////////////////
 echo "TEST USING TOOL CARDS";
 echo "<hr/>";
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
 echo($testPlayer->useToolCard(4));
 echo "<br/>";
 var_dump($testPlayer->getTown());
 echo "<hr/>";
-echo($testPlayer->useToolCard(5));
+
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
 echo "<br/>";
-var_dump($testPlayer->getTown());
-echo "<hr/>";
-echo($testPlayer->useToolCard(2));
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
 echo "<br/>";
-var_dump($testPlayer->getTown());
-echo "<hr/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
 echo($testPlayer->useToolCard(1));
 echo "<br/>";
 var_dump($testPlayer->getTown());
 echo "<hr/>";
-echo($testPlayer->useToolCard(0));
-echo "<br/>";
-var_dump($testPlayer->getTown());
+//////////////////////////////////////////////////////
+echo "TEST REMOVING TOOL CARDS";
 echo "<hr/>";
-echo($testPlayer->useToolCard(3));
+
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
 echo "<br/>";
-var_dump($testPlayer->getTown());
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
 echo "<hr/>";
+
+$testPlayer->discardCard(1);
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+
+$testPlayer->discardCard(1);
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayer->discardCard(0);
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+echo "TEST CLEARING DISCARD PILE";
+echo "<hr/>";
+$testPlayer->clearDiscardPile();
+
+$testArray = $testPlayer->getToolCards();
+
+echo "On hand";
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Discard pile";
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+echo "TEST TARGETING OTHER PLAYER";
+echo "<hr/>";
+
+$testArray = array(
+	"name" => "University of doom",
+	"type" => "University town",
+	"food" => 20,
+	"happiness" => 30,
+	"money" => 10,
+	"education" => 50,
+	"military" => 40
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+$testTown = new Town($testArray);
+
+$otherPlayer = new Player("That Guy", $testTown);
+
+$testPlayer->addToolCards($toolCardsArray);
+$otherPlayer->addToolCards($toolCardsArray);
+
+$testArray = $testPlayer->getToolCards();
+
+echo ($testPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($testPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+$testArray = $otherPlayer->getToolCards();
+
+echo ($otherPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($otherPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $otherPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+var_dump($testPlayer->getTown());
+var_dump($otherPlayer->getTown());
+
+echo "<hr/>";
+
+$testPlayer->useToolCard(1, $otherPlayer);
+
+$testArray = $testPlayer->getToolCards();
+
+echo ($testPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($testPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $testPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+$testArray = $otherPlayer->getToolCards();
+
+echo ($otherPlayer->getName()."On hand");
+echo "<br/>";
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo ($otherPlayer->getName()."Discard pile");
+echo "<br/>";
+$testArray = $otherPlayer->getDiscardPile();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+var_dump($testPlayer->getTown());
+var_dump($otherPlayer->getTown());
+
+echo "<hr/>";
+echo "TEST REMOTE CARD REMOVING";
+echo "<hr/>";
+
+
+
+echo "<hr/>";
+
 ?>
