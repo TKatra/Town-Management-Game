@@ -6,6 +6,7 @@ class World
 	protected $toolDiscardDeck = array();
 	protected $eventDeck = array();
 	protected $eventDiscardDeck = array();
+	protected $currentEventCard;
 
 	public function __construct($players)//, $toolDeck, $eventDeck array, array, array
 	{
@@ -25,6 +26,10 @@ class World
 	public function getEventDeck()
 	{
 		return $this->eventDeck;
+	}
+	public function getCurrentEventCard()
+	{
+		return $this->currentEventCard;
 	}
 
 	//REMOVE THESE AFTER TESTS!!
