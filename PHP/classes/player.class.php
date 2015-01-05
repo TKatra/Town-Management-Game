@@ -98,7 +98,7 @@ class Player
 		}
 	}
 
-	protected function activateEffect($effect, $targetedPlayer = null)
+	protected function activateEffect($effect, $toolCard, $targetedPlayer = null)
 	{
 		if($targetedPlayer != null)
 		{
@@ -128,9 +128,21 @@ class Player
 
 			if($effect->getCardsToRemove() > 0)
 			{
-				for($i = 0; $i < $effect->getCardsToRemove(); $i++)
+				if($toolCard != null)
 				{
-					$this->discardCard(mt_rand(0, (count($this->toolCards) - 1)));
+					for($i = 0; $i < $effect->getCardsToRemove(); $i++)
+					{
+						do
+						{
+							$randomIndex = mt_rand(0, (count($this->toolCards) - 1));
+						}while ($randomIndex == array_search($toolCard, $this->toolCards));
+
+						$this->discardCard($randomIndex);
+					}
+				}
+				else
+				{
+					throw new Exception("Player card not defined.");
 				}
 			}
 		}
@@ -154,9 +166,9 @@ class Player
 				{
 					if (is_a($opponent, "Player") || is_subclass_of($opponent, "Player"))
 					{
-						$this->activateEffect($toolCard->getCostEffect());
-						$this->activateEffect($toolCard->getSelfEffect());
-						$this->activateEffect($toolCard->getOpponentEffect(), $opponent);
+						$this->activateEffect($toolCard->getCostEffect(), $toolCard);
+						$this->activateEffect($toolCard->getSelfEffect(), $toolCard);
+						$this->activateEffect($toolCard->getOpponentEffect(), $toolCard, $opponent);
 
 						$this->discardCard(array_search($toolCard, $this->toolCards));
 					}
