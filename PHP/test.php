@@ -987,8 +987,7 @@ for($i = 0; $i < count($testArray); $i++)
 }
 
 $world->changePlayerOrder();
-echo"Changed order";
-echo "<br/>";
+echo "<hr/>";
 
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
@@ -998,8 +997,7 @@ for($i = 0; $i < count($testArray); $i++)
 }
 
 $world->changePlayerOrder();
-echo"Changed order";
-echo "<br/>";
+echo "<hr/>";
 
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
@@ -1009,8 +1007,7 @@ for($i = 0; $i < count($testArray); $i++)
 }
 
 $world->changePlayerOrder();
-echo"Changed order";
-echo "<br/>";
+echo "<hr/>";
 
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
@@ -1018,5 +1015,7 @@ for($i = 0; $i < count($testArray); $i++)
 	echo("[".$i."] = ".$testArray[$i]->getName());
 	echo "<br/>";
 }
+echo "<hr/>";
+
 echo "<hr/>";
 ?>
