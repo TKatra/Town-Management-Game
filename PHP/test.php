@@ -768,6 +768,24 @@ $testTown = new Town($testArray);
 
 $otherPlayer = new Player("That Guy", $testTown);
 
+$testArray = array(
+	"name" => "Smog town",
+	"type" => "Industrial town",
+	"food" => 10,
+	"happiness" => 20,
+	"money" => 50,
+	"education" => 40,
+	"military" => 30
+	);
+foreach ($testArray as $key => $value)
+{
+	echo("[".$key."] = ".$value);
+	echo "<br/>";
+}
+
+
+$otherPlayer2 =new Player("A dude", $testTown);
+
 $testPlayer->addToolCards($toolCardsArray);
 $otherPlayer->addToolCards($toolCardsArray);
 
@@ -947,5 +965,58 @@ for($i = 0; $i < count($testArray); $i++)
 
 var_dump($testPlayer->getTown());
 var_dump($otherPlayer->getTown());
+echo "<hr/>";
+echo "TESTING WORLD";
+echo "<hr/>";
 
+$players = array($testPlayer, $otherPlayer, $otherPlayer2);
+$world = new World($players);
+
+var_dump($world);
+
+echo "<hr/>";
+echo "TESTING CHANGE PLAYER ORDER";
+echo "<hr/>";
+
+
+$testArray = $world->getPlayerQueue();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo "<br/>";
+}
+
+$world->changePlayerOrder();
+echo"Changed order";
+echo "<br/>";
+
+$testArray = $world->getPlayerQueue();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo "<br/>";
+}
+
+$world->changePlayerOrder();
+echo"Changed order";
+echo "<br/>";
+
+$testArray = $world->getPlayerQueue();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo "<br/>";
+}
+
+$world->changePlayerOrder();
+echo"Changed order";
+echo "<br/>";
+
+$testArray = $world->getPlayerQueue();
+for($i = 0; $i < count($testArray); $i++)
+{
+	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo "<br/>";
+}
+echo "<hr/>";
 ?>
