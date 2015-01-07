@@ -355,4 +355,487 @@ for ($i = 0; $i < count($testArray); $i++)
 }
 
 echo "<hr/>";
+echo "TEST DEALING TOOL CARDS";
+echo "<hr/>";
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+echo "BEFORE DEAL";
+echo "<hr/>";
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+$testArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getName());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getName());
+		echo "<br/>";
+	}
+}
+
+echo "<hr/>";
+echo "AFTER DEAL";
+echo "<hr/>";
+
+$world->dealToolCards();
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getName());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+// echo "<hr/>";
+echo "DISCARD FROM PLAYERS";
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+
+	if($i == 0)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+	}
+	else if($i == 1)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+	}
+	else if($i == 2)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+	}
+}
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+ // echo "<hr/>";
+
+$world->fetchDiscardedCards();
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$world->dealToolCards();
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+
+	if($i == 0)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+	}
+	else if($i == 1)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+	}
+	else if($i == 2)
+	{
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+		$testPlayerArray[$i]->discardCard(0);
+	}
+}
+
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+$world->fetchDiscardedCards();
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+echo "DEAL ANOTHER ONE";
+echo "<hr/>";
+
+$world->dealToolCards();
+
+echo "Tool Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDeck();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "Tool Discard Deck";
+echo "<br/>";
+
+$testArray = $world->getToolDiscardPile();
+
+for ($i = 0; $i < count($testArray); $i++)
+{ 
+	echo("[".$i."] = ".$testArray[$i]->getTitle());
+	echo "<br/>";
+}
+
+echo "<hr/>";
+
+$testPlayerArray = $world->getPlayerQueue();
+for ($i = 0; $i < count($testPlayerArray); $i++)
+{ 
+	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
+	echo "<br/>";
+	echo "Tool Cards";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getToolCards();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "Discard Pile";
+	echo "<br/>";
+	$tempToolCards = $testPlayerArray[$i]->getDiscardPile();
+	for ($j = 0; $j < count($tempToolCards); $j++)
+	{
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
+		echo "<br/>";
+	}
+	echo "<hr/>";
+}
+
+echo "EVENT CARDS";
+echo "<hr/>";
+
+
+
+echo "<hr/>";
 ?>
