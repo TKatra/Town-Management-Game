@@ -8,11 +8,11 @@ class World
 	protected $eventDiscardDeck = array();
 	protected $currentEventCard;
 
-	public function __construct($players)//, $toolDeck, $eventDeck array, array, array
+	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
 		$this->playerQueue = $players;
-		// $this->toolDeck = $toolDeck;
-		// $this->eventDeck = $eventDeck;
+		 $this->toolDiscardDeck = $toolDeck;
+		 $this->eventDiscardDeck = $eventDeck;
 	}
 
 	public function getPlayerQueue()
@@ -51,5 +51,25 @@ class World
 		$this->playerQueue = array_values($this->playerQueue);
 	}
 
-	
+	public function sortToolDeck()
+	{
+		while (count($this->toolDiscardDeck) > 0)
+		{
+			$randomIndex = rand(0, count($this->toolDiscardDeck) -1);
+			$this->toolDeck[] = $this->toolDiscardDeck[$randomIndex];
+			unset($this->toolDiscardDeck[$randomIndex]);
+			$this->toolDiscardDeck = array_values($this->toolDiscardDeck);
+		}
+	}
+
+	public function sortEventDeck()
+	{
+		while (count($this->eventDiscardDeck) > 0)
+		{
+			$randomIndex = rand(0, count($this->eventDiscardDeck) -1);
+			$this->eventDeck[] = $this->eventDiscardDeck[$randomIndex];
+			unset($this->eventDiscardDeck[$randomIndex]);
+			$this->eventDiscardDeck = array_values($this->eventDiscardDeck);
+		}
+	}
 }
