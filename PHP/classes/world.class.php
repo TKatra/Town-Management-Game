@@ -3,16 +3,18 @@ class World
 {
 	protected $playerQueue = array();
 	protected $toolDeck = array();
-	protected $toolDiscardDeck = array();
+	protected $toolDiscardPile = array();
 	protected $eventDeck = array();
-	protected $eventDiscardDeck = array();
+	protected $eventDiscardPile = array();
 	protected $currentEventCard;
 
 	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
 		$this->playerQueue = $players;
-		 $this->toolDiscardDeck = $toolDeck;
-		 $this->eventDiscardDeck = $eventDeck;
+		$this->toolDiscardPile = $toolDeck;
+		$this->eventDiscardPile = $eventDeck;
+
+
 	}
 
 	public function getPlayerQueue()
@@ -34,13 +36,13 @@ class World
 
 	//REMOVE THESE AFTER TESTS!!
 	////////////////////////////////////////
-	public function getToolDiscardDeck()
+	public function getToolDiscardPile()
 	{
-		return $this->toolDiscardDeck;
+		return $this->toolDiscardPile;
 	}
-	public function getEventDiscardDeck()
+	public function getEventDiscardPile()
 	{
-		return $this->eventDiscardDeck;
+		return $this->eventDiscardPile;
 	}
 	////////////////////////////////////////
 
@@ -51,25 +53,77 @@ class World
 		$this->playerQueue = array_values($this->playerQueue);
 	}
 
+	protected function addToDiscardPile($discardedCards)
+	{
+		for ($i = 0; $i < count($discardedCards); $i++)
+		{
+			$this->toolDiscardPile[] = $discardedCards[$i];
+		}
+	}
+
+	public function fetchDiscardedCards()
+	{
+		for ($i = 0; $i < count($this->playerQueue); $i++)
+		{
+			$this->addToDiscardPile($this->playerQueue[$i]->getDiscardPile());
+			$this->playerQueue[$i]->clearDiscardPile();
+		}
+	}
+
 	public function sortToolDeck()
 	{
-		while (count($this->toolDiscardDeck) > 0)
+		while (count($this->toolDiscardPile) > 0)
 		{
-			$randomIndex = rand(0, count($this->toolDiscardDeck) -1);
-			$this->toolDeck[] = $this->toolDiscardDeck[$randomIndex];
-			unset($this->toolDiscardDeck[$randomIndex]);
-			$this->toolDiscardDeck = array_values($this->toolDiscardDeck);
+			$randomIndex = rand(0, count($this->toolDiscardPile) -1);
+			$this->toolDeck[] = $this->toolDiscardPile[$randomIndex];
+			unset($this->toolDiscardPile[$randomIndex]);
+			$this->toolDiscardPile = array_values($this->toolDiscardPile);
 		}
 	}
 
 	public function sortEventDeck()
 	{
-		while (count($this->eventDiscardDeck) > 0)
+		while (count($this->eventDiscardPile) > 0)
 		{
-			$randomIndex = rand(0, count($this->eventDiscardDeck) -1);
-			$this->eventDeck[] = $this->eventDiscardDeck[$randomIndex];
-			unset($this->eventDiscardDeck[$randomIndex]);
-			$this->eventDiscardDeck = array_values($this->eventDiscardDeck);
+			$randomIndex = rand(0, count($this->eventDiscardPile) -1);
+			$this->eventDeck[] = $this->eventDiscardPile[$randomIndex];
+			unset($this->eventDiscardPile[$randomIndex]);
+			$this->eventDiscardPile = array_values($this->eventDiscardPile);
 		}
+	}
+
+	protected function givePlayerCards($player)
+	{
+		$cardsToGive = array();
+		for ($i = 0; $i < (5 - count($player->getToolCards())); $i++)
+		{
+			$cardsToGive[] = $this->toolDeck[0];
+			unset($this->toolDeck[0]);
+			$this->toolDeck = array_values($this->toolDeck);
+		}
+		$player->addToolCards($cardsToGive);
+	}
+
+	public function dealToolCards()
+	{
+		for ($i = 0; $i < count($this->playerQueue); $i++)
+		{
+			if(5 - count($this->playerQueue[$i]->getToolCards()) > count($this->toolDeck))
+			{
+				$this->sortToolDeck();
+				$this->givePlayerCards($this->playerQueue[$i]);
+			}
+			else
+			{
+				$this->givePlayerCards($this->playerQueue[$i]);
+			}
+		}
+	}
+
+	public function takeAnEventCard()
+	{
+		$this->currentEventCard = $this->eventDeck[0];
+		unset($this->eventDeck[0]);
+		$this->eventDeck = array_values($this->eventDeck);
 	}
 }
