@@ -3,7 +3,7 @@ include_once("../libs/nodebite-swiss-army-oop.php");
 
 $connectInfo =array(
   "host" => "127.0.0.1",
-  "dbname" => "test",
+  "dbname" => "wu14oop2",
   "username" => "root",
   "password" => "mysql",
   "prefix" => "saves"
@@ -264,7 +264,7 @@ for ($i = 0; $i < count($testArray); $i++)
 echo "Tool Discard Deck";
 echo "<br/>";
 
-$testArray = $world->getToolDiscardDeck();
+$testArray = $world->getToolDiscardPile();
 
 for ($i = 0; $i < count($testArray); $i++)
 { 
@@ -292,7 +292,7 @@ for ($i = 0; $i < count($testArray); $i++)
 echo "Tool Discard Deck";
 echo "<br/>";
 
-$testArray = $world->getToolDiscardDeck();
+$testArray = $world->getToolDiscardPile();
 
 for ($i = 0; $i < count($testArray); $i++)
 { 
@@ -318,7 +318,7 @@ for ($i = 0; $i < count($testArray); $i++)
 echo "Event Discard Deck";
 echo "<br/>";
 
-$testArray = $world->getEventDiscardDeck();
+$testArray = $world->getEventDiscardPile();
 
 for ($i = 0; $i < count($testArray); $i++)
 { 
@@ -329,6 +329,9 @@ for ($i = 0; $i < count($testArray); $i++)
 echo "<hr/>";
 echo "EVENT CARDS: SORTED";
 echo "<hr/>";
+
+echo "Event Deck";
+echo "<br/>";
 
 $world->sortEventDeck();
 
@@ -343,7 +346,7 @@ for ($i = 0; $i < count($testArray); $i++)
 echo "Event Discard Deck";
 echo "<br/>";
 
-$testArray = $world->getEventDiscardDeck();
+$testArray = $world->getEventDiscardPile();
 
 for ($i = 0; $i < count($testArray); $i++)
 { 
