@@ -7,14 +7,13 @@ class World
 	protected $eventDeck = array();
 	protected $eventDiscardPile = array();
 	protected $currentEventCard;
+	protected $currentPlayerTurn;
 
 	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
 		$this->playerQueue = $players;
 		$this->toolDiscardPile = $toolDeck;
 		$this->eventDiscardPile = $eventDeck;
-
-
 	}
 
 	public function getPlayerQueue()
@@ -33,20 +32,41 @@ class World
 	{
 		return $this->currentEventCard;
 	}
+	public function getCurrentPlayerTurn()
+	{
+		return $this->$currentPlayerTurn;
+	}
 
 	//REMOVE THESE AFTER TESTS!!
 	////////////////////////////////////////
-	public function getToolDiscardPile()
+	public function getToolDiscardPile()//REMOVE!
 	{
 		return $this->toolDiscardPile;
 	}
-	public function getEventDiscardPile()
+	public function getEventDiscardPile()//REMOVE!
 	{
 		return $this->eventDiscardPile;
 	}
 	////////////////////////////////////////
 
-	public function changePlayerOrder()
+	public function startNewRound()
+	{
+		$this->dealToolCards();
+		$this->takeAnEventCard();
+		$this->currentPlayerTurn = 0;
+	}
+
+	public function endTurn()
+	{
+
+	}
+
+	protected function endRound()
+	{
+
+	}
+
+	public function changePlayerOrder()//protected
 	{
 		$this->playerQueue[] = $this->playerQueue[0];
 		unset($this->playerQueue[0]);
@@ -61,7 +81,7 @@ class World
 		}
 	}
 
-	public function fetchDiscardedCards()
+	public function fetchDiscardedCards()//protected
 	{
 		for ($i = 0; $i < count($this->playerQueue); $i++)
 		{
@@ -70,7 +90,7 @@ class World
 		}
 	}
 
-	public function sortToolDeck()
+	public function sortToolDeck()//protected
 	{
 		while (count($this->toolDiscardPile) > 0)
 		{
@@ -81,7 +101,7 @@ class World
 		}
 	}
 
-	public function sortEventDeck()
+	public function sortEventDeck()//protected
 	{
 		while (count($this->eventDiscardPile) > 0)
 		{
@@ -104,7 +124,7 @@ class World
 		$player->addToolCards($cardsToGive);
 	}
 
-	public function dealToolCards()
+	public function dealToolCards()//protected
 	{
 		for ($i = 0; $i < count($this->playerQueue); $i++)
 		{
