@@ -7,13 +7,7 @@ class Condition
 
 	public function __construct($conditionDetails) //associative array
 	{
-		//highestOfPlayers
-		//lowestOfPlayers
-		//
-		//moreThanValue
-		//lessThanValue
-
-		$this->checkType($conditionDetails["conditionType"]);
+		$this->checkConditionType($conditionDetails["conditionType"]);
 		$this->checkStatsType($conditionDetails["statsType"]);
 
 		if($conditionDetails["value"] > 100)
@@ -43,7 +37,7 @@ class Condition
 		return $this->statsType;
 	}
 
-	private function checkType($conditionType)
+	protected function checkConditionType($conditionType)
 	{
 		switch ($conditionType) 
 		{
