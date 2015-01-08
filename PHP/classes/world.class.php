@@ -11,9 +11,7 @@ class World
 
 	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
-		$this->playerQueue = $players;
-		$this->toolDiscardPile = $toolDeck;
-		$this->eventDiscardPile = $eventDeck;
+		$this->startNewGame($players, $toolDeck, $eventDeck);
 	}
 
 	public function getPlayerQueue()
@@ -49,6 +47,15 @@ class World
 	}
 	////////////////////////////////////////
 
+	public function startNewGame($players, $toolDeck, $eventDeck)
+	{
+		$this->playerQueue = $players;
+		$this->toolDiscardPile = $toolDeck;
+		$this->eventDiscardPile = $eventDeck;
+
+		$this->startNewRound();
+	}
+
 	public function startNewRound()
 	{
 		$this->dealToolCards();
@@ -58,10 +65,21 @@ class World
 
 	public function endTurn()
 	{
+		$this->fetchDiscardedCards($this->currentPlayerTurn);
+		$this->currentPlayerTurn++;
 
+		if(!($this->currentPlayerTurn < count($this->playerQueue)))
+		{
+
+		}
 	}
 
 	protected function endRound()
+	{
+
+	}
+
+	protected function gameOver()
 	{
 
 	}
@@ -81,20 +99,17 @@ class World
 		}
 	}
 
-	public function fetchDiscardedCards()//protected
+	public function fetchDiscardedCards($index)
 	{
-		for ($i = 0; $i < count($this->playerQueue); $i++)
-		{
-			$this->addToDiscardPile($this->playerQueue[$i]->getDiscardPile());
-			$this->playerQueue[$i]->clearDiscardPile();
-		}
+		$this->addToDiscardPile($this->playerQueue[$index]->getDiscardPile());
+		$this->playerQueue[$index]->clearDiscardPile();
 	}
 
 	public function sortToolDeck()//protected
 	{
 		while (count($this->toolDiscardPile) > 0)
 		{
-			$randomIndex = rand(0, count($this->toolDiscardPile) -1);
+			$randomIndex = mt_rand(0, count($this->toolDiscardPile) -1);
 			$this->toolDeck[] = $this->toolDiscardPile[$randomIndex];
 			unset($this->toolDiscardPile[$randomIndex]);
 			$this->toolDiscardPile = array_values($this->toolDiscardPile);
@@ -105,7 +120,7 @@ class World
 	{
 		while (count($this->eventDiscardPile) > 0)
 		{
-			$randomIndex = rand(0, count($this->eventDiscardPile) -1);
+			$randomIndex = mt_rand(0, count($this->eventDiscardPile) -1);
 			$this->eventDeck[] = $this->eventDiscardPile[$randomIndex];
 			unset($this->eventDiscardPile[$randomIndex]);
 			$this->eventDiscardPile = array_values($this->eventDiscardPile);
