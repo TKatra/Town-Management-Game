@@ -846,4 +846,6 @@ echo "RESTART WORLD AND START A ROUND";
 echo "<hr/>";
 
 $world = new World($players, $toolCards, $eventCards);
+// var_dump($world->getCurrentEventCard());
+// $world->endRound();
 ?>
