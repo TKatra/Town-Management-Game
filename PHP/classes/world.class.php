@@ -49,6 +49,9 @@ class World
 
 	public function startNewGame($players, $toolDeck, $eventDeck)
 	{
+		echo "<hr/>";
+		echo "START NEW GAME!";
+		echo "<hr/>";
 		$this->playerQueue = $players;
 		$this->toolDiscardPile = $toolDeck;
 		$this->eventDiscardPile = $eventDeck;
@@ -58,6 +61,9 @@ class World
 
 	public function startNewRound()
 	{
+		echo "<hr/>";
+		echo "START NEW ROUND!";
+		echo "<hr/>";
 		$this->dealToolCards();
 		$this->takeAnEventCard();
 
@@ -71,6 +77,9 @@ class World
 
 	public function endTurn()
 	{
+		echo "<hr/>";
+		echo "END TURN!";
+		echo "<hr/>";
 		$this->fetchDiscardedCards($this->currentPlayerTurn);
 		$this->currentPlayerTurn++;
 
@@ -80,29 +89,58 @@ class World
 		}
 	}
 
-	protected function endRound()
+	public function endRound()
 	{
+		echo "<hr/>";
+		echo "END ROUND!";
+		echo "<hr/>";
 		for ($i = 0; $i < count($this->playerQueue); $i++)
 		{
+			// var_dump($this->playerQueue[$i]->getTown());
+			// echo "<hr/>";
 			if($this->hasPassedCondition($this->currentEventCard->getWinCondition(),$this->playerQueue[$i]) == true)
 			{
-
+				// echo "SOMEONE WON A CHALLANGE";
+				$this->activateEffect($this->currentEventCard->getWinEffect(), $this->playerQueue[$i]);
 			}
 			else if($this->hasPassedCondition($this->currentEventCard->getLoseCondition(),$this->playerQueue[$i]) == true)
 			{
-
+				// echo "SOMEONE LOST A CHALLANGE";
+				$this->activateEffect($this->currentEventCard->getLoseEffect(), $this->playerQueue[$i]);
 			}
+			var_dump($this->playerQueue[$i]->getTown());
+			// echo "<hr/>";
+		}
+
+		if($this->checkForWinners() == true)
+		{
+			$this->gameOver();
 		}
 	}
 
 	protected function gameOver()
 	{
+		echo "<hr/>";
+		echo "GAME OVER!";
+		echo "<hr/>";
+	}
 
+
+
+	protected function checkForWinners()
+	{
+		for ($i = 0; $i < count($this->playerQueue); $i++)
+		{
+			if($this->playerQueue[$i]->getTown()->getPopulation() >= 100)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected function hasPassedCondition($condition, $player)
 	{
-		// $ $this->getStatType()
 		if($condition->getConditionType() == "highestOfPlayers")
 		{
 			if($condition->getStatsType() == "food")
@@ -245,7 +283,7 @@ class World
 		{
 			if($condition->getStatsType() == "food")
 			{
-				if($player->getFood() >= $condition->getValue())
+				if($player->getTown()->getFood() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -253,7 +291,7 @@ class World
 			}
 			else if($condition->getStatsType() == "happiness")
 			{
-				if($player->getHappiness() >= $condition->getValue())
+				if($player->getTown()->getHappiness() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -261,7 +299,7 @@ class World
 			}
 			else if($condition->getStatsType() == "money")
 			{
-				if($player->getMoney() >= $condition->getValue())
+				if($player->getTown()->getMoney() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -269,7 +307,7 @@ class World
 			}
 			else if($condition->getStatsType() == "education")
 			{
-				if($player->getEducation() >= $condition->getValue())
+				if($player->getTown()->getEducation() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -277,7 +315,7 @@ class World
 			}
 			else if($condition->getStatsType() == "military")
 			{
-				if($player->getMilitary() >= $condition->getValue())
+				if($player->getTown()->getMilitary() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -285,7 +323,7 @@ class World
 			}
 			else if($condition->getStatsType() == "population")
 			{
-				if($player->getPopulation() >= $condition->getValue())
+				if($player->getTown()->getPopulation() >= $condition->getValue())
 				{
 					return true;
 				}
@@ -296,7 +334,7 @@ class World
 		{
 			if($condition->getStatsType() == "food")
 			{
-				if($player->getFood() <= $condition->getValue())
+				if($player->getTown()->getFood() <= $condition->getValue())
 				{
 					return true;
 				}
@@ -304,7 +342,7 @@ class World
 			}
 			else if($condition->getStatsType() == "happiness")
 			{
-				if($player->getHappiness() <= $condition->getValue())
+				if($player->getTown()->getHappiness() <= $condition->getValue())
 				{
 					return true;
 				}
@@ -312,7 +350,7 @@ class World
 			}
 			else if($condition->getStatsType() == "money")
 			{
-				if($player->getMoney() <= $condition->getValue())
+				if($player->getTown()->getMoney() <= $condition->getValue())
 				{
 					return true;
 				}
@@ -320,7 +358,7 @@ class World
 			}
 			else if($condition->getStatsType() == "education")
 			{
-				if($player->getEducation() <= $condition->getValue())
+				if($player->getTown()->getEducation() <= $condition->getValue())
 				{
 					return true;
 				}
@@ -328,7 +366,7 @@ class World
 			}
 			else if($condition->getStatsType() == "military")
 			{
-				if($player->getMilitary() <= $condition->getValue())
+				if($player->getTown()->getMilitary() <= $condition->getValue())
 				{
 					return true;
 				}
@@ -336,18 +374,13 @@ class World
 			}
 			else if($condition->getStatsType() == "population")
 			{
-				if($player->getPopulation() <= $condition->getValue())
+				if($player->getTown()->getPopulation() <= $condition->getValue())
 				{
 					return true;
 				}
 				return false;
 			}
 		}
-	}
-
-	protected function getStatType()
-	{
-
 	}
 
 	protected function activateEffect($effect, $player)
