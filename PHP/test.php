@@ -111,7 +111,7 @@ var_dump($testCondition);
 echo "<hr/>";
 
 $testArray = array(
-	"conditionType" => "moreThanValue",
+	"conditionType" => "equalOrMoreThanValue",
 	"statsType" => "money",
 	"value" => -3467
 	);
