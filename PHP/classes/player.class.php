@@ -102,12 +102,12 @@ class Player
 	{
 		if($targetedPlayer != null)
 		{
-			$targetedPlayer->town->setFood($targetedPlayer->town->getFood() + $effect->getFood());
-			$targetedPlayer->town->setHappiness($targetedPlayer->town->getHappiness() + $effect->getHappiness());
-			$targetedPlayer->town->setMoney($targetedPlayer->town->getMoney() + $effect->getMoney());
-			$targetedPlayer->town->setEducation($targetedPlayer->town->getEducation() + $effect->getEducation());
-			$targetedPlayer->town->setMilitary($targetedPlayer->town->getMilitary() + $effect->getMilitary());
-			$targetedPlayer->town->setPopulation($targetedPlayer->town->getPopulation() + $effect->getPopulation());
+			$targetedPlayer->getTown()->setFood($targetedPlayer->getTown()->getFood() + $effect->getFood());
+			$targetedPlayer->getTown()->setHappiness($targetedPlayer->getTown()->getHappiness() + $effect->getHappiness());
+			$targetedPlayer->getTown()->setMoney($targetedPlayer->getTown()->getMoney() + $effect->getMoney());
+			$targetedPlayer->getTown()->setEducation($targetedPlayer->getTown()->getEducation() + $effect->getEducation());
+			$targetedPlayer->getTown()->setMilitary($targetedPlayer->getTown()->getMilitary() + $effect->getMilitary());
+			$targetedPlayer->getTown()->setPopulation($targetedPlayer->getTown()->getPopulation() + $effect->getPopulation());
 
 			if($effect->getCardsToRemove() > 0)
 			{
