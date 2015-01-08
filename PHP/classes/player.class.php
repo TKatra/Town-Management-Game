@@ -113,7 +113,7 @@ class Player
 			{
 				for($i = 0; $i < $effect->getCardsToRemove(); $i++)
 				{
-					$targetedPlayer->discardCard(rand(0, (count($targetedPlayer->toolCards) - 1)));
+					$targetedPlayer->discardCard(mt_rand(0, (count($targetedPlayer->toolCards) - 1)));
 				}
 			}
 		}
@@ -134,7 +134,7 @@ class Player
 					{
 						do
 						{
-							$randomIndex = rand(0, (count($this->toolCards) - 1));
+							$randomIndex = mt_rand(0, (count($this->toolCards) - 1));
 						}while ($randomIndex == array_search($toolCard, $this->toolCards));
 
 						$this->discardCard($randomIndex);

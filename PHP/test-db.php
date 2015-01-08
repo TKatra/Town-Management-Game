@@ -61,7 +61,7 @@ $towns = array();
 $tempTown;
 for ($i = 0; $i < count($DBTownData); $i ++) 
 {
-	$randomIndex = rand(0, count($DBTownNames) -1);
+	$randomIndex = mt_rand(0, count($DBTownNames) -1);
 	$DBTownData[$i]["name"] = $DBTownNames[$randomIndex]["name"];
 	unset($DBTownNames[$randomIndex]);
 	$DBTownNames = array_values($DBTownNames);
@@ -88,7 +88,7 @@ $DBPlayerNames = $PDOHelper->query("SELECT * FROM PlayerNames");
 
 $players = array();
 
-$randomTownIndex = rand(0, count($towns) -1);
+$randomTownIndex = mt_rand(0, count($towns) -1);
 
 $tempPlayer = new Player("Hiero", $towns[$randomTownIndex]);
 $players[] = $tempPlayer;
@@ -98,8 +98,8 @@ $towns = array_values($towns);
 
 for ($i = 0; $i < 2; $i++) 
 {
-	$randomNameIndex = rand(0, count($DBPlayerNames) -1);
-	$randomTownIndex = rand(0, count($towns) -1);
+	$randomNameIndex = mt_rand(0, count($DBPlayerNames) -1);
+	$randomTownIndex = mt_rand(0, count($towns) -1);
 
 	$tempTown = $towns[$randomTownIndex];
 	$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomNameIndex]["name"], $tempTown);
@@ -416,7 +416,7 @@ for ($i = 0; $i < count($testArray); $i++)
 	$tempToolCards = $testArray[$i]->getToolCards();
 	for ($j = 0; $j < count($tempToolCards); $j++)
 	{
-		echo("[".$j."] = ".$tempToolCards[$j]->getName());
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
 		echo "<br/>";
 	}
 	echo "Discard Pile";
@@ -424,7 +424,7 @@ for ($i = 0; $i < count($testArray); $i++)
 	$tempToolCards = $testArray[$i]->getDiscardPile();
 	for ($j = 0; $j < count($tempToolCards); $j++)
 	{
-		echo("[".$j."] = ".$tempToolCards[$j]->getName());
+		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
 		echo "<br/>";
 	}
 }
@@ -558,11 +558,12 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 }
  // echo "<hr/>";
 
-$world->fetchDiscardedCards();
+
 
 $testPlayerArray = $world->getPlayerQueue();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
+	$world->fetchDiscardedCards($i);
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
 	echo "<br/>";
 	echo "Tool Cards";
@@ -714,10 +715,12 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 		echo("[".$j."] = ".$tempToolCards[$j]->getTitle());
 		echo "<br/>";
 	}
+
+	$world->fetchDiscardedCards($i);
 	echo "<hr/>";
 }
 
-$world->fetchDiscardedCards();
+
 
 echo "Tool Deck";
 echo "<br/>";
