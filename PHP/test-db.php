@@ -832,10 +832,15 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 	echo "<hr/>";
 }
 
-echo "EVENT CARDS";
+echo "TAKE AN EVENT CARD";
 echo "<hr/>";
 
-
+$world->takeAnEventCard();
+echo($world->getCurrentEventCard()->getTitle());
 
 echo "<hr/>";
+echo "RESTART WORLD AND START A ROUND";
+echo "<hr/>";
+
+$world = new World($players, $toolCards, $eventCards);
 ?>
