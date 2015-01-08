@@ -51,7 +51,7 @@ class Condition
 				break;
 			case "lowestOfPlayers":
 				break;
-			case "moreThanValue":
+			case "equalOrMoreThanValue":
 				break;
 			case "lessThanValue":
 				break;

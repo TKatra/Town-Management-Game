@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 07 jan 2015 kl 19:34
+-- Tid vid skapande: 08 jan 2015 kl 12:50
 -- Serverversion: 5.6.17
 -- PHP-version: 5.4.28
 
@@ -38,27 +38,27 @@ CREATE TABLE IF NOT EXISTS `Conditions` (
 --
 
 INSERT INTO `Conditions` (`ID`, `conditionType`, `statsType`, `value`) VALUES
-(3, 'moreThanValue', 'happiness', 50),
+(3, 'equalOrMoreThanValue', 'happiness', 50),
 (4, 'lessThanValue', 'happiness', 30),
-(5, 'moreThanValue', 'food', 50),
+(5, 'equalOrMoreThanValue', 'food', 50),
 (6, 'lessThanValue', 'food', 30),
-(7, 'moreThanValue', 'money', 50),
+(7, 'equalOrMoreThanValue', 'money', 50),
 (8, 'lessThanValue', 'money', 50),
-(9, 'moreThanValue', 'military', 40),
+(9, 'equalOrMoreThanValue', 'military', 40),
 (10, 'lessThanValue', 'military', 40),
-(11, 'moreThanValue', 'military', 100),
+(11, 'equalOrMoreThanValue', 'military', 100),
 (12, 'lessThanValue', 'military', 100),
-(13, 'moreThanValue', 'education', 30),
+(13, 'equalOrMoreThanValue', 'education', 30),
 (14, 'lessThanValue', 'education', 30),
 (15, 'highestOfPlayers', 'education', 0),
 (16, 'lowestOfPlayers', 'education', 0),
-(17, 'moreThanValue', 'military', 50),
+(17, 'equalOrMoreThanValue', 'military', 50),
 (18, 'lessThanValue', 'military', 30),
-(19, 'moreThanValue', 'education', 70),
+(19, 'equalOrMoreThanValue', 'education', 70),
 (20, 'lessThanValue', 'education', 50),
-(21, 'moreThanValue', 'money', 70),
+(21, 'equalOrMoreThanValue', 'money', 70),
 (22, 'lessThanValue', 'money', 70),
-(23, 'moreThanValue', 'happiness', 70),
+(23, 'equalOrMoreThanValue', 'happiness', 70),
 (24, 'lessThanValue', 'happiness', 30);
 
 -- --------------------------------------------------------
