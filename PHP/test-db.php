@@ -405,7 +405,7 @@ for ($i = 0; $i < count($testArray); $i++)
 	echo "<br/>";
 }
 
-$testArray = $world->getPlayerQueue();
+$testArray = $world->getPlayers();
 for ($i = 0; $i < count($testArray); $i++)
 { 
 	echo("[".$i."] = ".$testArray[$i]->getName());
@@ -458,7 +458,7 @@ for ($i = 0; $i < count($testArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
@@ -486,7 +486,7 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 echo "DISCARD FROM PLAYERS";
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 {
 	$tempToolCards = $testPlayerArray[$i]->getToolCards();
@@ -532,7 +532,7 @@ for ($i = 0; $i < count($testArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
@@ -559,7 +559,7 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 
 
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	$world->fetchDiscardedCards($i);
@@ -634,7 +634,7 @@ for ($i = 0; $i < count($testArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
@@ -659,7 +659,7 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 }
 
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 {
 	$tempToolCards = $testPlayerArray[$i]->getToolCards();
@@ -693,7 +693,7 @@ for ($i = 0; $i < count($testPlayerArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
@@ -745,7 +745,7 @@ for ($i = 0; $i < count($testArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());
@@ -810,7 +810,7 @@ for ($i = 0; $i < count($testArray); $i++)
 
 echo "<hr/>";
 
-$testPlayerArray = $world->getPlayerQueue();
+$testPlayerArray = $world->getPlayers();
 for ($i = 0; $i < count($testPlayerArray); $i++)
 { 
 	echo("[".$i."] = ".$testPlayerArray[$i]->getName());

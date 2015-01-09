@@ -982,7 +982,7 @@ echo "<hr/>";
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
 {
-	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo("[".$i."] = ".$world->getPlayers()[$testArray[$i]]->getName());
 	echo "<br/>";
 }
 
@@ -992,7 +992,7 @@ echo "<hr/>";
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
 {
-	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo("[".$i."] = ".$world->getPlayers()[$testArray[$i]]->getName());
 	echo "<br/>";
 }
 
@@ -1002,7 +1002,7 @@ echo "<hr/>";
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
 {
-	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo("[".$i."] = ".$world->getPlayers()[$testArray[$i]]->getName());
 	echo "<br/>";
 }
 
@@ -1012,7 +1012,7 @@ echo "<hr/>";
 $testArray = $world->getPlayerQueue();
 for($i = 0; $i < count($testArray); $i++)
 {
-	echo("[".$i."] = ".$testArray[$i]->getName());
+	echo("[".$i."] = ".$world->getPlayers()[$testArray[$i]]->getName());
 	echo "<br/>";
 }
 echo "<hr/>";
