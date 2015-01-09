@@ -66,8 +66,8 @@ for ($i = 0; $i < count($DBTownData); $i ++)
 	unset($DBTownNames[$randomIndex]);
 	$DBTownNames = array_values($DBTownNames);
 
-	$tempTown = new Town($DBTownData[$i]);
-	$towns[] = $tempTown;
+	// $tempTown = new Town($DBTownData[$i]);
+	$towns[] = new Town($DBTownData[$i]);
 }
 var_dump($towns);
 echo "<hr/>";
@@ -83,7 +83,6 @@ echo"<hr/>";
 echo"TEST CREATING PLAYERS";
 echo"<hr/>";
 
-$DBPlayers = $PDOHelper->query("SELECT * FROM Players");
 $DBPlayerNames = $PDOHelper->query("SELECT * FROM PlayerNames");
 
 $players = array();
@@ -848,4 +847,6 @@ echo "<hr/>";
 $world = new World($players, $toolCards, $eventCards);
 // var_dump($world->getCurrentEventCard());
 // $world->endRound();
+
+
 ?>
