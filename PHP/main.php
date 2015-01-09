@@ -12,6 +12,7 @@ $connectInfo =array(
 $request = $_REQUEST;
 $PDOHelper = new PDOHelper($connectInfo["host"], $connectInfo["dbname"], $connectInfo["username"], $connectInfo["password"]);
 $ds = new DBObjectSaver($connectInfo);
+$result = array();
 
 if (!isset($ds->players))
 {
@@ -29,37 +30,36 @@ if (!isset($ds->world))
 if($request["commandLine"] == "preGameBuild")
 {
 	$ds->towns = getTownsData();
-	echo(json_encode($ds->towns));
+	$result["towns"] = $ds->towns;
+
+	echo(json_encode($result));
 	exit();
 }
 else if($request["commandLine"] == "startNewGame")
 {
-	$players[] = new Player("Hiero", $towns[$index]);
+	$request["playerSettings"]["name"];
+	$request["playerSettings"]["townIndex"];
+	$players[] = new Player($request["playerSettings"]["name"], $ds->towns[$request["playerSettings"]["townIndex"]]);
 
-	unset($towns[$index]);
-	$towns = array_values($towns);
+	unset($ds->towns[$index]);
+	$ds->towns = array_values($ds->towns);
 
 	startNewGame();
 }
 
+///////////////////////////////////////////////////////
+
 function getTownsData()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
-	$DBData = $PDOHelper->query("SELECT * FROM Towns ");
-
-	$towns = array();
-	for ($i = 0; $i < count($DBData); $i ++) 
-	{
-
-		$towns[] = $DBData[$i];
-	}
-	return $towns;
+	$DBData = $PDOHelper->query("SELECT * FROM Towns");
+	return $DBData;
 }
 
 function createComputerPlayers()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 	$DBTownNames = $PDOHelper->query("SELECT * FROM TownNames");
 	$DBPlayerNames = $PDOHelper->query("SELECT * FROM PlayerNames");
@@ -67,23 +67,23 @@ function createComputerPlayers()
 	for ($i = 0; $i < 2; $i++) 
 	{
 		$randomNameIndex = mt_rand(0, count($DBPlayerNames) -1);
-		$randomTownIndex = mt_rand(0, count($towns) -1);
+		$randomTownIndex = mt_rand(0, count($ds->towns) -1);
 
-		$tempTown = $towns[$randomTownIndex];
+		$tempTown = $ds->towns[$randomTownIndex];
 		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomNameIndex]["name"], $tempTown);
 		$players[] = $tempPlayer;
 
 		unset($DBPlayerNames[$randomNameIndex]);
 		$DBPlayerNames = array_values($DBPlayerNames);
-		unset($towns[$randomTownIndex]);
-		$towns = array_values($towns);
+		unset($ds->towns[$randomTownIndex]);
+		$ds->towns = array_values($ds->towns);
 	}
 }
 
 
 function startNewGame()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 	$ds->world = new World($players, $toolDeck, $eventDeck);
 
@@ -92,7 +92,7 @@ function startNewGame()
 
 function startNewRound()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 	$ds->world->dealToolCards();
 	$ds->world->takeAnEventCard();
@@ -107,7 +107,7 @@ function startNewRound()
 
 function endTurn()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 	$ds->world->fetchDiscardedCards($ds->world->getcurrentPlayerTurn());
 	$ds->world->nextPlayerTurn();
@@ -120,7 +120,7 @@ function endTurn()
 
 function endRound()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
 	{
@@ -146,7 +146,7 @@ function endRound()
 
 function gameOver()
 {
-	global $PDOHelper, $ds;
+	global $PDOHelper, $ds, $result;
 
 
 }
