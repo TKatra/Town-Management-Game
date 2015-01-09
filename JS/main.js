@@ -5,7 +5,6 @@ $(function ()
 	};
 	function siteStartup()
 	{
-		console.log("dthdryyrdtr");
 		requestData.commandLine = "preGameBuild";
 		console.log(requestData);
 		contactPHP(requestData, temp);
@@ -13,7 +12,6 @@ $(function ()
 
 	function contactPHP(request, successFunction)
 	{
-		console.log(request);
 		$.ajax({
 			url:"PHP/main.php",
 			dataType: "json",
