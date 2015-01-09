@@ -5,9 +5,9 @@ $(function ()
 	};
 	function siteStartup()
 	{
+
 		requestData.commandLine = "preGameBuild";
-		console.log(requestData);
-		contactPHP(requestData, temp);
+		contactPHP(requestData, buildTownList);
 	}
 
 	function contactPHP(request, successFunction)
@@ -24,9 +24,9 @@ $(function ()
 		});
 	}
 
-	function temp(data)
+	function buildTownList(townData)
 	{
-		console.log(data);
+		console.log("townData: " + townData["towns"][0]);
 	}
 
 	siteStartup();
