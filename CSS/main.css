@@ -1,18 +1,81 @@
 body{
-
+	font-family: sans-serif;
 }
 
-.pop-up{
+h1, h2, h3, h4{
+	font-family: 'Courgette', cursive;
+}
+
+h1{
+	font-size: 30px;
+}
+
+h2 {
+	font-size: 26px;
+}
+
+h3 {
+	font-size: 24px;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.button {
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	padding: 10px 25px;
+	font-family: 'Courgette', cursive;
+	font-size: 20px;
+	text-align: center;
+	border:1px solid #000000;
+	border-radius: 25px;
+	background-color: #ed8013;
+}
+
+div.button:hover{
+	background-color: #ff9933;
+}
+
+div.button:active{
+	background-color: #ffb163;
+}
+
+.pop-up {
 	position: fixed;
 	overflow: hidden;
 	top:50%;
 	left: 50%;
 	margin: -35vh 0 0 -25vw;
-	height: 100px;
+	height: auto;
 	width: 50vw;
+	text-align: center;
 	background-color: #f9c777;
 	border:1px solid #000000;
+	border-radius: 5px;
+	box-shadow: 5px 5px 8px #000000;
+}
 
+.pop-up .content {
+	padding: 15px;
+}
+
+.pop-up h1 {
+	margin: 0 0 15px;
+}
+
+.pop-up h2 {
+	margin: 0 0 10px;
+}
+.pop-up input{
+	width: 50%;
 }
 
 .main{
