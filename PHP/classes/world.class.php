@@ -1,6 +1,7 @@
 <?php
 class World
 {
+	protected $players = array();
 	protected $playerQueue = array();
 	protected $toolDeck = array();
 	protected $toolDiscardPile = array();
@@ -11,9 +12,20 @@ class World
 
 	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
-		$this->playerQueue = $players;
+		$this->players = $players;
+		
 		$this->toolDiscardPile = $toolDeck;
 		$this->eventDiscardPile = $eventDeck;
+
+		for ($i = 0; $i < count($this->players); $i++)
+		{
+			$this->playerQueue[] = $i;
+		}
+	}
+
+	public function getPlayers()
+	{
+		return $this->players;
 	}
 
 	public function getPlayerQueue()
@@ -37,6 +49,21 @@ class World
 		return $this->$currentPlayerTurn;
 	}
 
+
+
+	public function getToolDiscardPile()
+	{
+		return $this->toolDiscardPile;
+	}
+
+	public function getEventDiscardPile()
+	{
+		return $this->eventDiscardPile;
+	}
+
+
+
+
 	public function resetCurrentPlayerTurn()
 	{
 		$this->$currentPlayerTurn = 0;
@@ -49,9 +76,9 @@ class World
 
 	protected function checkForWinners()
 	{
-		for ($i = 0; $i < count($this->playerQueue); $i++)
+		for ($i = 0; $i < count($this->players); $i++)
 		{
-			if($this->playerQueue[$i]->getTown()->getPopulation() >= 100)
+			if($this->players[$i]->getTown()->getPopulation() >= 100)
 			{
 				return true;
 			}
@@ -65,9 +92,9 @@ class World
 		{
 			if($condition->getStatsType() == "food")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getFood() > $player->getFood())
+					if($this->players[$i]->getFood() > $player->getFood())
 					{
 						return false;
 					}
@@ -76,9 +103,9 @@ class World
 			}
 			else if($condition->getStatsType() == "happiness")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getHappiness() > $player->getTown()->getHappiness())
+					if($this->players[$i]->getTown()->getHappiness() > $player->getTown()->getHappiness())
 					{
 						return false;
 					}
@@ -87,9 +114,9 @@ class World
 			}
 			else if($condition->getStatsType() == "money")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getMoney() > $player->getTown()->getMoney())
+					if($this->players[$i]->getTown()->getMoney() > $player->getTown()->getMoney())
 					{
 						return false;
 					}
@@ -98,9 +125,9 @@ class World
 			}
 			else if($condition->getStatsType() == "education")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getEducation() > $player->getTown()->getEducation())
+					if($this->players[$i]->getTown()->getEducation() > $player->getTown()->getEducation())
 					{
 						return false;
 					}
@@ -109,9 +136,9 @@ class World
 			}
 			else if($condition->getStatsType() == "military")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getMilitary() > $player->getTown()->getMilitary())
+					if($this->players[$i]->getTown()->getMilitary() > $player->getTown()->getMilitary())
 					{
 						return false;
 					}
@@ -120,9 +147,9 @@ class World
 			}
 			else if($condition->getStatsType() == "population")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getPopulation() > $player->getTown()->getPopulation())
+					if($this->players[$i]->getTown()->getPopulation() > $player->getTown()->getPopulation())
 					{
 						return false;
 					}
@@ -134,9 +161,9 @@ class World
 		{
 			if($condition->getStatsType() == "food")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getFood() < $player->getFood())
+					if($this->players[$i]->getFood() < $player->getFood())
 					{
 						return false;
 					}
@@ -145,9 +172,9 @@ class World
 			}
 			else if($condition->getStatsType() == "happiness")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getHappiness() < $player->getTown()->getHappiness())
+					if($this->players[$i]->getTown()->getHappiness() < $player->getTown()->getHappiness())
 					{
 						return false;
 					}
@@ -156,9 +183,9 @@ class World
 			}
 			else if($condition->getStatsType() == "money")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getMoney() < $player->getTown()->getMoney())
+					if($this->players[$i]->getTown()->getMoney() < $player->getTown()->getMoney())
 					{
 						return false;
 					}
@@ -167,9 +194,9 @@ class World
 			}
 			else if($condition->getStatsType() == "education")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getEducation() < $player->getTown()->getEducation())
+					if($this->players[$i]->getTown()->getEducation() < $player->getTown()->getEducation())
 					{
 						return false;
 					}
@@ -178,9 +205,9 @@ class World
 			}
 			else if($condition->getStatsType() == "military")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getMilitary() < $player->getTown()->getMilitary())
+					if($this->players[$i]->getTown()->getMilitary() < $player->getTown()->getMilitary())
 					{
 						return false;
 					}
@@ -189,9 +216,9 @@ class World
 			}
 			else if($condition->getStatsType() == "population")
 			{
-				for ($i = 0; $i < count($this->playerQueue); $i++)
+				for ($i = 0; $i < count($this->players); $i++)
 				{
-					if($this->playerQueue[$i]->getTown()->getPopulation() < $player->getTown()->getPopulation())
+					if($this->players[$i]->getTown()->getPopulation() < $player->getTown()->getPopulation())
 					{
 						return false;
 					}
@@ -338,8 +365,8 @@ class World
 
 	public function fetchDiscardedCards($index)
 	{
-		$this->addToDiscardPile($this->playerQueue[$index]->getDiscardPile());
-		$this->playerQueue[$index]->clearDiscardPile();
+		$this->addToDiscardPile($this->players[$this->playerQueue[$index]]->getDiscardPile());
+		$this->players[$this->playerQueue[$index]]->clearDiscardPile();
 	}
 
 	public function sortToolDeck()//protected
@@ -380,14 +407,14 @@ class World
 	{
 		for ($i = 0; $i < count($this->playerQueue); $i++)
 		{
-			if(5 - count($this->playerQueue[$i]->getToolCards()) > count($this->toolDeck))
+			if(5 - count($this->players[$this->playerQueue[$i]]->getToolCards()) > count($this->toolDeck))
 			{
 				$this->sortToolDeck();
-				$this->givePlayerCards($this->playerQueue[$i]);
+				$this->givePlayerCards($this->players[$this->playerQueue[$i]]);
 			}
 			else
 			{
-				$this->givePlayerCards($this->playerQueue[$i]);
+				$this->givePlayerCards($this->players[$this->playerQueue[$i]]);
 			}
 		}
 	}
