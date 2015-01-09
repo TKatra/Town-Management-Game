@@ -1,0 +1,20 @@
+body{
+
+}
+
+.pop-up{
+	position: fixed;
+	overflow: hidden;
+	top:50%;
+	left: 50%;
+	margin: -35vh 0 0 -25vw;
+	height: 100px;
+	width: 50vw;
+	background-color: #f9c777;
+	border:1px solid #000000;
+
+}
+
+.main{
+	display: block;
+}
