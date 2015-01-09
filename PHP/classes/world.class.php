@@ -11,7 +11,9 @@ class World
 
 	public function __construct($players, $toolDeck, $eventDeck)// array, array, array
 	{
-		$this->startNewGame($players, $toolDeck, $eventDeck);
+		$this->playerQueue = $players;
+		$this->toolDiscardPile = $toolDeck;
+		$this->eventDiscardPile = $eventDeck;
 	}
 
 	public function getPlayerQueue()
@@ -35,97 +37,15 @@ class World
 		return $this->$currentPlayerTurn;
 	}
 
-	//REMOVE THESE AFTER TESTS!!
-	////////////////////////////////////////
-	public function getToolDiscardPile()//REMOVE!
+	public function resetCurrentPlayerTurn()
 	{
-		return $this->toolDiscardPile;
-	}
-	public function getEventDiscardPile()//REMOVE!
-	{
-		return $this->eventDiscardPile;
-	}
-	////////////////////////////////////////
-
-	public function startNewGame($players, $toolDeck, $eventDeck)
-	{
-		echo "<hr/>";
-		echo "START NEW GAME!";
-		echo "<hr/>";
-		$this->playerQueue = $players;
-		$this->toolDiscardPile = $toolDeck;
-		$this->eventDiscardPile = $eventDeck;
-
-		$this->startNewRound();
+		$this->$currentPlayerTurn = 0;
 	}
 
-	public function startNewRound()
+	public function nextPlayerTurn()
 	{
-		echo "<hr/>";
-		echo "START NEW ROUND!";
-		echo "<hr/>";
-		$this->dealToolCards();
-		$this->takeAnEventCard();
-
-		for ($i = 0; $i < count($this->playerQueue); $i++)
-		{
-			$this->activateEffect($this->currentEventCard->getStartupEffect(), $this->playerQueue[$i]);
-		}
-
-		$this->currentPlayerTurn = 0;
+		$this->$currentPlayerTurn++;
 	}
-
-	public function endTurn()
-	{
-		echo "<hr/>";
-		echo "END TURN!";
-		echo "<hr/>";
-		$this->fetchDiscardedCards($this->currentPlayerTurn);
-		$this->currentPlayerTurn++;
-
-		if(!($this->currentPlayerTurn < count($this->playerQueue)))
-		{
-			$this->endRound();
-		}
-	}
-
-	public function endRound()
-	{
-		echo "<hr/>";
-		echo "END ROUND!";
-		echo "<hr/>";
-		for ($i = 0; $i < count($this->playerQueue); $i++)
-		{
-			// var_dump($this->playerQueue[$i]->getTown());
-			// echo "<hr/>";
-			if($this->hasPassedCondition($this->currentEventCard->getWinCondition(),$this->playerQueue[$i]) == true)
-			{
-				// echo "SOMEONE WON A CHALLANGE";
-				$this->activateEffect($this->currentEventCard->getWinEffect(), $this->playerQueue[$i]);
-			}
-			else if($this->hasPassedCondition($this->currentEventCard->getLoseCondition(),$this->playerQueue[$i]) == true)
-			{
-				// echo "SOMEONE LOST A CHALLANGE";
-				$this->activateEffect($this->currentEventCard->getLoseEffect(), $this->playerQueue[$i]);
-			}
-			var_dump($this->playerQueue[$i]->getTown());
-			// echo "<hr/>";
-		}
-
-		if($this->checkForWinners() == true)
-		{
-			$this->gameOver();
-		}
-	}
-
-	protected function gameOver()
-	{
-		echo "<hr/>";
-		echo "GAME OVER!";
-		echo "<hr/>";
-	}
-
-
 
 	protected function checkForWinners()
 	{
