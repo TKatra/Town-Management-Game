@@ -5,7 +5,11 @@ $(function ()
 	};
 	function siteStartup()
 	{
+		$(".pop-up").hide();
+		$(".error-message").hide();
+		$(".pop-up.pre-game").show();
 
+		$("div.button.start-game").click(startGame);
 		requestData.commandLine = "preGameBuild";
 		contactPHP(requestData, buildTownList);
 	}
@@ -53,6 +57,73 @@ $(function ()
 	{
 		$(".town-list-item.selected").removeClass("selected");
 		$(this).addClass("selected");
+	}
+
+	function startGame()
+	{
+		var playerName;
+		var townName;
+		var townIndex;
+		var textBoxesValid = true;
+		var townSelectionValid = true;
+
+		$(".pop-up.pre-game input").each(function()
+		{
+			if($.trim($(this).val()) == "")
+			{
+				textBoxesValid = false;
+			}
+			else
+			{
+
+			}
+		});
+
+		if($(".town-list-item.selected").length != 1)
+		{
+			townSelectionValid = false;
+		}
+		else
+		{
+			console.log("Selected town index", $(".town-list-item.selected").data("index"));
+		}
+
+		console.log("textBoxesValid: ", textBoxesValid);
+		console.log("townSelectionValid: ", townSelectionValid);
+
+		if(textBoxesValid === true && townSelectionValid === true)
+		{
+			$(".pop-up.pre-game .error-message.text-boxes").hide();
+			$(".pop-up.pre-game .error-message.town").hide();
+
+			requestData.commandLine = "startNewGame";
+			requestData.playerSettings.playerName = 
+			contactPHP(requestData, updateBoard);
+		}
+		else 
+		{
+			if(textBoxesValid === false)
+			{
+				$(".pop-up.pre-game .error-message.text-boxes").show();
+			}
+			else
+			{
+				$(".pop-up.pre-game .error-message.text-boxes").hide();
+			}
+			if(townSelectionValid === false)
+			{
+				$(".pop-up.pre-game .error-message.town").show();
+			}
+			else
+			{
+				$(".pop-up.pre-game .error-message.town").hide();
+			}
+		}
+	}
+
+	function updateBoard(updateData)
+	{
+		console.log("updateData: ", updateData);
 	}
 
 	siteStartup();
