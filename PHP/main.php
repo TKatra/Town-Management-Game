@@ -185,7 +185,7 @@ function startNewRound()
 
 	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
 	{
-		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayerQueue()[$i]);
+		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayer()[$i]);
 	}
 
 	$ds->world->resetCurrentPlayerTurn();
