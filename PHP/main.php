@@ -31,18 +31,33 @@ if($request["commandLine"] == "preGameBuild")
 {
 	$ds->towns = getTownsData();
 	$result["towns"] = $ds->towns;
-
+	
 	echo(json_encode($result));
 	exit();
 }
 else if($request["commandLine"] == "startNewGame")
 {
-	$request["playerSettings"]["name"];
-	$request["playerSettings"]["townIndex"];
-	$players[] = new Player($request["playerSettings"]["name"], $ds->towns[$request["playerSettings"]["townIndex"]]);
+	// $request["playerSettings"]["playerName"];
+	// $request["playerSettings"]["townName"];
+	// $request["playerSettings"]["townIndex"];
+	$townArray = $ds->towns[$request["playerSettings"]["townIndex"]];
+	$townArray["name"] = $request["playerSettings"]["townName"];
 
-	unset($ds->towns[$index]);
+	echo "(".$request["playerSettings"]["playerName"].")";
+	echo "(".$request["playerSettings"]["townName"].")";
+	echo "(".$request["playerSettings"]["townIndex"].")";
+
+
+
+	// $tempPlayer = new Player($request["playerSettings"]["name"], $townArray);
+	$ds->players[] = new Player($request["playerSettings"]["name"], $townArray);
+
+	echo "(".$ds->players[0]->getName().")";
+
+	unset($ds->towns[$request["playerSettings"]["townIndex"]]);
 	$ds->towns = array_values($ds->towns);
+
+	createComputerPlayers();
 
 	startNewGame();
 }
@@ -71,7 +86,9 @@ function createComputerPlayers()
 
 		$tempTown = $ds->towns[$randomTownIndex];
 		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomNameIndex]["name"], $tempTown);
-		$players[] = $tempPlayer;
+		$ds->players[] = $tempPlayer;
+
+		echo "(".$tempPlayer->getName().")";
 
 		unset($DBPlayerNames[$randomNameIndex]);
 		$DBPlayerNames = array_values($DBPlayerNames);
@@ -80,12 +97,93 @@ function createComputerPlayers()
 	}
 }
 
+function createToolCards()
+{
+	$toolCards = array();
+
+	for ($i = 0; $i < count($DBToolCards); $i++)
+	{
+		$query = "SELECT Effects.* 
+		FROM ToolCards, Effects 
+		WHERE ToolCards.costEffectID = Effects.ID AND ToolCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBToolCards[$i]["costEffect"] = $DBTempArray[0];
+
+		$query = "SELECT Effects.* 
+		FROM ToolCards, Effects 
+		WHERE ToolCards.selfEffectID = Effects.ID AND ToolCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBToolCards[$i]["selfEffect"] = $DBTempArray[0];
+
+		$query = "SELECT Effects.* 
+		FROM ToolCards, Effects 
+		WHERE ToolCards.opponentEffectID = Effects.ID AND ToolCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBToolCards[$i]["opponentEffect"] = $DBTempArray[0];
+
+		$tempToolCard = new ToolCard($DBToolCards[$i]);
+
+		$toolCards[] = $tempToolCard;
+		$toolCards[] = $tempToolCard;
+	}
+	return $toolCards;
+}
+
+function createEventCards()
+{
+	$eventCards = array();
+
+	for ($i = 0; $i < count($DBEventCards); $i++)
+	{
+		$query = "SELECT Conditions.* 
+		FROM EventCards, Conditions 
+		WHERE EventCards.winConditionID = Conditions.ID AND EventCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBEventCards[$i]["winCondition"] = $DBTempArray[0];
+
+		$query = "SELECT Conditions.* 
+		FROM EventCards, Conditions 
+		WHERE EventCards.loseConditionID = Conditions.ID AND EventCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBEventCards[$i]["loseCondition"] = $DBTempArray[0];
+
+		$query = "SELECT Effects.* 
+		FROM EventCards, Effects 
+		WHERE EventCards.winEffectID = Effects.ID AND EventCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBEventCards[$i]["winEffect"] = $DBTempArray[0];
+
+
+		$query = "SELECT Effects.* 
+		FROM EventCards, Effects 
+		WHERE EventCards.loseEffectID = Effects.ID AND EventCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBEventCards[$i]["loseEffect"] = $DBTempArray[0];
+
+
+		$query = "SELECT Effects.* 
+		FROM EventCards, Effects 
+		WHERE EventCards.startupEffectID = Effects.ID AND EventCards.ID = ".($i + 1).";";
+		$DBTempArray = $PDOHelper->query($query);
+		$DBEventCards[$i]["startupEffect"] = $DBTempArray[0];
+
+		$tempEventCard = new EventCard($DBEventCards[$i]);
+		$eventCards[] = $tempEventCard;
+	}
+	return $eventCards;
+}
 
 function startNewGame()
 {
 	global $PDOHelper, $ds, $result;
 
-	$ds->world = new World($players, $toolDeck, $eventDeck);
+	$toolDeck = createToolCards();
+	$eventDeck = createEventCards();
+
+	// echo "(".$toolDeck[0]->getTitle().")";
+	// echo "(".$eventDeck[0]->getTitle().")";
+
+	$ds->world = new World($ds->players, $toolDeck, $eventDeck);
 
 	startNewRound();
 }
@@ -103,6 +201,11 @@ function startNewRound()
 	}
 
 	$ds->world->resetCurrentPlayerTurn();
+
+	echo "(".$ds->world->getPlayers()[0]->getName().")";
+
+	$result["players"] = $ds->world->getPlayers();
+	echo(json_encode($result));
 }
 
 function endTurn()
