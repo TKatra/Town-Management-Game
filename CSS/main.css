@@ -92,6 +92,7 @@ div.button:active{
 }
 .pop-up input{
 	width: 50%;
+	text-align: center;
 }
 
 .pop-up .town-list {
