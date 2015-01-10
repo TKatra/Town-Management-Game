@@ -74,7 +74,7 @@ class World
 		$this->currentPlayerTurn++;
 	}
 
-	protected function checkForWinners()
+	public function checkForWinners()
 	{
 		for ($i = 0; $i < count($this->players); $i++)
 		{
@@ -86,7 +86,7 @@ class World
 		return false;
 	}
 
-	protected function hasPassedCondition($condition, $player)
+	public function hasPassedCondition($condition, $player)
 	{
 		if($condition->getConditionType() == "highestOfPlayers")
 		{
@@ -330,7 +330,7 @@ class World
 		}
 	}
 
-	protected function activateEffect($effect, $player)
+	public function activateEffect($effect, $player)
 	{
 		$player->getTown()->setFood($player->getTown()->getFood() + $effect->getFood());
 		$player->getTown()->setHappiness($player->getTown()->getHappiness() + $effect->getHappiness());
@@ -355,7 +355,7 @@ class World
 		$this->playerQueue = array_values($this->playerQueue);
 	}
 
-	protected function addToDiscardPile($discardedCards)
+	public function addToDiscardPile($discardedCards)
 	{
 		for ($i = 0; $i < count($discardedCards); $i++)
 		{
@@ -391,7 +391,7 @@ class World
 		}
 	}
 
-	protected function givePlayerCards($player)
+	public function givePlayerCards($player)
 	{
 		$cardsToGive = array();
 		for ($i = 0; $i < (5 - count($player->getToolCards())); $i++)
