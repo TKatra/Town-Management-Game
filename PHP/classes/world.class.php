@@ -46,7 +46,7 @@ class World
 	}
 	public function getCurrentPlayerTurn()
 	{
-		return $this->$currentPlayerTurn;
+		return $this->currentPlayerTurn;
 	}
 
 
@@ -66,12 +66,12 @@ class World
 
 	public function resetCurrentPlayerTurn()
 	{
-		$this->$currentPlayerTurn = 0;
+		$this->currentPlayerTurn = 0;
 	}
 
 	public function nextPlayerTurn()
 	{
-		$this->$currentPlayerTurn++;
+		$this->currentPlayerTurn++;
 	}
 
 	protected function checkForWinners()
