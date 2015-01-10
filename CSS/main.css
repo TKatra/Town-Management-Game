@@ -2,20 +2,20 @@ body{
 	font-family: sans-serif;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3, h4, p{
 	font-family: 'Courgette', cursive;
 }
 
 h1{
-	font-size: 30px;
+	font-size: 28px;
 }
 
 h2 {
-	font-size: 26px;
+	font-size: 22px;
 }
 
 h3 {
-	font-size: 24px;
+	font-size: 18px;
 }
 
 .noselect {
@@ -48,13 +48,26 @@ div.button:active{
 	background-color: #ffb163;
 }
 
+.site-cover {
+	z-index: 10;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	background-color: #000000;
+}
+
 .pop-up {
+	z-index: 15;
+	display: inline-block;
 	position: fixed;
 	overflow: hidden;
 	top:50%;
 	left: 50%;
 	margin: -35vh 0 0 -25vw;
+	padding: 15px;
 	height: auto;
+	max-height: 65%;
 	width: 50vw;
 	text-align: center;
 	background-color: #f9c777;
@@ -64,7 +77,10 @@ div.button:active{
 }
 
 .pop-up .content {
-	padding: 15px;
+	/*position: relative;*/
+	display: inline-block;
+	width: 100%;
+	/*padding: 15px;*/
 }
 
 .pop-up h1 {
@@ -78,6 +94,96 @@ div.button:active{
 	width: 50%;
 }
 
+.pop-up .town-list {
+	height: 150px;
+	overflow: auto;
+	border:1px solid #000000;
+}
+
+.pop-up .town-list .town-list-item{
+	cursor: pointer;
+	border: 1px solid #000000;
+	background-color: #ca8b25;
+}
+
+.pop-up .town-list .town-list-item:hover{
+	cursor: pointer;
+	border: 1px solid #000000;
+	background-color: #db9b34;
+}
+
+.pop-up .town-list .town-list-item.selected{
+	background-color: #ffd694;
+}
+
 .main{
 	display: block;
+	position: relative;
+}
+
+.opponent-area {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background-color: #999999;
+	/*height: 150px;*/
+	/*border-bottom: 1px solid #000000;*/
+}
+
+.opponent-area .opponent-display {
+	display: inline-block;
+	height: 150px;
+	width: 450px;
+	background-color: #AAAAAA;
+	border-bottom: 1px solid #000000;
+	
+}
+
+.opponent-area .opponent-display .top-display {
+	position: relative;
+	height: 80%;
+	border-bottom: 1px solid #000000;
+}
+
+.opponent-area .opponent-display .top-display img {
+	display: inline-block;
+	max-height: 100%;
+	border-right: 1px solid #000000;
+}
+
+.opponent-area .opponent-display .top-display .status-display {
+	position: absolute;
+	display: inline-block;
+	height: 100%;
+	padding: 5px;
+}
+
+.opponent-area .opponent-display .top-display .status-display .status-row{
+	width: 100%;
+}
+
+.opponent-area .opponent-display .top-display .status-display .status-row p{
+	display: inline-block;
+	line-height: 110%;
+}
+
+.opponent-area .opponent-display .lower-display{
+	text-align: center;
+}
+.opponent-area .opponent-display .lower-display p {
+	/*padding: 15% 0 0;*/
+	padding: 5px;
+}
+
+.opponent-area #opponent-1.opponent-display {
+	border-right: 1px solid #000000;
+}
+
+.opponent-area #opponent-1.opponent-display .top-display img{
+	
+}
+
+.opponent-area #opponent-2.opponent-display {
+	float: right;
+	border-left: 1px solid #000000;
 }
