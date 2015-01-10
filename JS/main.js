@@ -1,7 +1,12 @@
 $(function ()
 {
 	var requestData = {
-		commandLine:""
+		commandLine:null,
+		playerSettings:{
+			playerName:null,
+			townName:null,
+			townIndex: null
+		}
 	};
 	function siteStartup()
 	{
@@ -75,7 +80,14 @@ $(function ()
 			}
 			else
 			{
-
+				if($(this).attr("name") == "playerName")
+				{
+					playerName = $(this).val();
+				}
+				else if($(this).attr("name") == "townName")
+				{
+					townName = $(this).val();
+				}
 			}
 		});
 
@@ -85,23 +97,33 @@ $(function ()
 		}
 		else
 		{
-			console.log("Selected town index", $(".town-list-item.selected").data("index"));
+			console.log("Selected town index: ", $(".town-list-item.selected").data("index"));
+			townIndex = $(".town-list-item.selected").data("index");
 		}
+
+		console.log("playerName: ", playerName);
+		console.log("townName: ", townName);
+		console.log("townIndex: ", townIndex);
 
 		console.log("textBoxesValid: ", textBoxesValid);
 		console.log("townSelectionValid: ", townSelectionValid);
 
 		if(textBoxesValid === true && townSelectionValid === true)
 		{
+			console.log("Valid Settings!");
 			$(".pop-up.pre-game .error-message.text-boxes").hide();
 			$(".pop-up.pre-game .error-message.town").hide();
 
 			requestData.commandLine = "startNewGame";
-			requestData.playerSettings.playerName = 
+			requestData.playerSettings.playerName = playerName;
+			requestData.playerSettings.townName = townName;
+			requestData.playerSettings.townIndex = townIndex;
+			console.log("requestData: ", requestData);
 			contactPHP(requestData, updateBoard);
 		}
 		else 
 		{
+			console.log("Invalid Settings!");
 			if(textBoxesValid === false)
 			{
 				$(".pop-up.pre-game .error-message.text-boxes").show();
@@ -110,6 +132,7 @@ $(function ()
 			{
 				$(".pop-up.pre-game .error-message.text-boxes").hide();
 			}
+
 			if(townSelectionValid === false)
 			{
 				$(".pop-up.pre-game .error-message.town").show();
