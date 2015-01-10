@@ -16,6 +16,7 @@ $result = array();
 
 if($request["commandLine"] == "preGameBuild")
 {
+	resetValues();
 	$ds->towns = getTownsData();
 	$result["towns"] = $ds->towns;
 	
@@ -30,14 +31,10 @@ else if($request["commandLine"] == "startNewGame")
 	$townArray = $ds->towns[$request["playerSettings"]["townIndex"]];
 	$townArray["name"] = $request["playerSettings"]["townName"];
 
-	echo "(".$request["playerSettings"]["playerName"].")";
-	echo "(".$request["playerSettings"]["townName"].")";
-	echo "(".$request["playerSettings"]["townIndex"].")";
+
 
 	// $tempPlayer = new Player($request["playerSettings"]["name"], $townArray);
 	$ds->players[] = new Player($request["playerSettings"]["name"], $townArray);
-
-	echo "(".$ds->players[0]->getName().")";
 
 	unset($ds->towns[$request["playerSettings"]["townIndex"]]);
 	$ds->towns = array_values($ds->towns);
@@ -48,6 +45,24 @@ else if($request["commandLine"] == "startNewGame")
 }
 
 ///////////////////////////////////////////////////////
+
+function resetValues()
+{
+	if(count($ds->players))
+	{
+		unset($ds->players);
+	}
+	
+	if(count($ds->towns))
+	{
+		unset($ds->towns);
+	}
+
+	if(count($ds->world))
+	{
+		unset($ds->world);
+	}
+}
 
 function getTownsData()
 {
@@ -72,8 +87,6 @@ function createComputerPlayers()
 		$tempTown = $ds->towns[$randomTownIndex];
 		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomNameIndex]["name"], $tempTown);
 		$ds->players[] = $tempPlayer;
-
-		echo "(".$tempPlayer->getName().")";
 
 		unset($DBPlayerNames[$randomNameIndex]);
 		$DBPlayerNames = array_values($DBPlayerNames);
@@ -168,8 +181,8 @@ function startNewGame()
 	$toolDeck = createToolCards();
 	$eventDeck = createEventCards();
 
-	// echo "(".$toolDeck[0]->getTitle().")";
-	// echo "(".$eventDeck[0]->getTitle().")";
+	var_dump($ds->players);
+	die();
 
 	$ds->world = new World($ds->players, $toolDeck, $eventDeck);
 
@@ -185,12 +198,10 @@ function startNewRound()
 
 	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
 	{
-		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayer()[$i]);
+		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayers()[$i]);
 	}
 
 	$ds->world->resetCurrentPlayerTurn();
-
-	echo "(".$ds->world->getPlayers()[0]->getName().")";
 
 	$result["players"] = $ds->world->getPlayers();
 	echo(json_encode($result));
