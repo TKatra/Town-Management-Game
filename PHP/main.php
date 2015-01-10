@@ -14,19 +14,6 @@ $PDOHelper = new PDOHelper($connectInfo["host"], $connectInfo["dbname"], $connec
 $ds = new DBObjectSaver($connectInfo);
 $result = array();
 
-if (!isset($ds->players))
-{
-  $ds->players = array();
-}
-if (!isset($ds->towns))
-{
-	$ds->towns = array();
-}
-if (!isset($ds->world))
-{
-  $ds->world;
-}
-
 if($request["commandLine"] == "preGameBuild")
 {
 	$ds->towns = getTownsData();
@@ -97,6 +84,7 @@ function createComputerPlayers()
 
 function createToolCards()
 {
+	global $PDOHelper, $ds, $result;
 	$toolCards = array();
 
 	for ($i = 0; $i < count($DBToolCards); $i++)
@@ -129,7 +117,9 @@ function createToolCards()
 
 function createEventCards()
 {
+	global $PDOHelper, $ds, $result;
 	$eventCards = array();
+	$DBEventCards = $PDOHelper->query("SELECT * FROM EventCards");
 
 	for ($i = 0; $i < count($DBEventCards); $i++)
 	{
@@ -204,6 +194,7 @@ function startNewRound()
 
 	$result["players"] = $ds->world->getPlayers();
 	echo(json_encode($result));
+	exit();
 }
 
 function endTurn()
