@@ -47,8 +47,6 @@ else if($request["commandLine"] == "startNewGame")
 	echo "(".$request["playerSettings"]["townName"].")";
 	echo "(".$request["playerSettings"]["townIndex"].")";
 
-
-
 	// $tempPlayer = new Player($request["playerSettings"]["name"], $townArray);
 	$ds->players[] = new Player($request["playerSettings"]["name"], $townArray);
 
