@@ -46,9 +46,9 @@ class ToolCard extends Card
 		$responseArray["title"] = $this->title;
 		$responseArray["description"] = $this->description;
 		$responseArray["targetSelf"] = $this->targetSelf;
-		$responseArray["costEffect"] = $this->costEffect;
-		$responseArray["selfEffect"] = $this->selfEffect;
-		$responseArray["opponentEffect"] = $this->opponentEffect;
+		$responseArray["costEffect"] = $this->costEffect->toArray();
+		$responseArray["selfEffect"] = $this->selfEffect->toArray();
+		$responseArray["opponentEffect"] = $this->opponentEffect->toArray();
 		return $responseArray;
 	}
 }
