@@ -19,7 +19,9 @@ if($request["commandLine"] == "preGameBuild")
 	resetValues();
 	$ds->towns = getTownsData();
 	$result["towns"] = $ds->towns;
-	
+
+
+
 	echo(json_encode($result));
 	exit();
 }
@@ -31,6 +33,9 @@ else if($request["commandLine"] == "startNewGame")
 	$townArray = $ds->towns[$request["playerSettings"]["townIndex"]];
 	$townArray["name"] = $request["playerSettings"]["townName"];
 	$newTown = new Town($townArray);
+
+	// var_dump($newTown->toArray());
+	// die();
 
 	// $tempPlayer = new Player($request["playerSettings"]["name"], $townArray);
 	$ds->players[] = new Player($request["playerSettings"]["playerName"], $newTown);
@@ -89,7 +94,7 @@ function createComputerPlayers()
 		$townArray["name"] = $DBTownNames[$randomTownNameIndex]["name"];
 		$newTown = new Town($townArray);
 
-		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomPlayerNameIndex]["name"], $newTown);
+		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomPlayerNameIndex]["name"], $newTown, $i);
 		$ds->players[] = $tempPlayer;
 
 		unset($DBPlayerNames[$randomPlayerNameIndex]);
@@ -188,16 +193,13 @@ function startNewGame()
 	global $PDOHelper, $ds, $result;
 
 	$toolDeck = createToolCards();
-	// var_dump($toolDeck);
-	// die();
 	$eventDeck = createEventCards();
 
 	
 
 	$ds->world = new World($ds->players, $toolDeck, $eventDeck);
 
-	var_dump($ds->world);
-	die();
+
 
 	startNewRound();
 }
@@ -209,6 +211,9 @@ function startNewRound()
 	$ds->world->dealToolCards();
 	$ds->world->takeAnEventCard();
 
+	// var_dump($ds->world->toArray());
+	// die();
+
 	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
 	{
 		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayers()[$i]);
@@ -216,7 +221,12 @@ function startNewRound()
 
 	$ds->world->resetCurrentPlayerTurn();
 
-	$result["players"] = $ds->world->getPlayers();
+
+	$result["world"] = $ds->world->toArray();
+
+	// var_dump($result);
+	// die();
+
 	echo(json_encode($result));
 	exit();
 }
