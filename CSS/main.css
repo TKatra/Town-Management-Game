@@ -253,3 +253,48 @@ div.button:active{
 .player-section .status-display p {
 	display: inline-block;
 }
+
+.player-section .player-card-section{
+	display: inline-block;
+}
+
+.player-section .player-card-section .tool-card{
+	display: inline-block;
+	cursor: pointer;
+	height: 200px;
+	width: 150px;
+	text-align: center;
+	margin: 0 15px 0 0;
+	border: 3px solid #8e6c12;
+	border-radius: 10px;
+	background-color: #f3c64c;
+	overflow: auto;
+}
+
+.player-section .player-card-section .tool-card:hover{
+	background-color: #f5d479;
+}
+
+.player-section .player-card-section .tool-card p{
+	display: inline-block;
+	font-size: 10px;
+
+}
+
+.player-section .player-card-section .tool-card h2{
+	font-size: 15px;
+	border-bottom: 1px solid #000000;
+}
+
+.player-section .player-card-section .tool-card h3{
+	font-size: 12px;
+}
+
+.player-section .player-card-section .tool-card .stats-icon{
+	height: 10px;
+}
+
+.player-section .button-section {
+	float: right;
+}
+
