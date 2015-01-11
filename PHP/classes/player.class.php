@@ -194,6 +194,7 @@ class Player
 
 		$responseArray = array();
 		$responseArray["name"] = $this->name;
+		$responseArray["isComputer"] = false;
 		$responseArray["town"] = $this->town->toArray();
 		$responseArray["toolCards"] = $this->objectsToArray($this->toolCards);
 		return $responseArray;

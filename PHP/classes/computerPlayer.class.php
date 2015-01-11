@@ -1,10 +1,12 @@
 <?
 class ComputerPlayer extends Player
 {
-	public function __construct($name, $town) //string, Town 
+	protected $id;
+	public function __construct($name, $town, $id) //string, Town 
 	{
 		$this->name = $name;
 		$this->town = $town;
+		$this->id = $id;
 	}
 
 	public function toArray()
@@ -16,6 +18,8 @@ class ComputerPlayer extends Player
 
 		$responseArray = array();
 		$responseArray["name"] = $this->name;
+		$responseArray["isComputer"] = true;
+		$responseArray["id"] = $this->id;
 		$responseArray["town"] = $this->town->toArray();
 		$responseArray["toolCardsInDeck"] = count($this->toolCards);
 		return $responseArray;
