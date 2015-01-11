@@ -48,6 +48,7 @@ else if($request["commandLine"] == "startNewGame")
 
 function resetValues()
 {
+	global $PDOHelper, $ds, $result;
 	if(count($ds->players))
 	{
 		unset($ds->players);
