@@ -136,8 +136,8 @@ div.button:active{
 
 .opponent-area .opponent-display {
 	display: inline-block;
-	height: 150px;
-	width: 450px;
+	height: auto;
+	width: 350px;
 	background-color: #db9b34;
 	border-bottom: 1px solid #000000;
 	
@@ -151,8 +151,9 @@ div.button:active{
 
 .opponent-area .opponent-display .top-display img {
 	display: inline-block;
-	max-height: 100%;
+	max-height: 150px;
 	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
 }
 
 .opponent-area .opponent-display .top-display .status-display {
@@ -173,6 +174,7 @@ div.button:active{
 
 .opponent-area .opponent-display .lower-display{
 	text-align: center;
+	height: auto;
 }
 .opponent-area .opponent-display .lower-display p {
 	/*padding: 15% 0 0;*/
