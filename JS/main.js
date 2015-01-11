@@ -163,11 +163,58 @@ $(function ()
 
 		buildPlayerDisplays(players);
 		buildEventCardDisplay(currentEventCard);
+		// buildToolCardDisplay(players["toolCards"]);
+		for(var i = 0; i < players.length; i++)
+		{
+			if(players[i]["isComputer"] == false)
+			{
+				buildToolCardDisplay(players[i]["toolCards"]);
+			}
+		}
 	}
 
 	function buildToolCardDisplay(toolCards)
 	{
+		var display;
+		var costEffect;
+		var selfEffect;
+		var opponentEffect;
 
+		for(var i = 0; i < toolCards.length; i++)
+		{
+			display = $("#tool-card-" + i);
+			costEffect = display.find(".cost-effect");
+			selfEffect = display.find(".self-effect");
+			opponentEffect = display.find(".opponent-effect");
+
+			display.find(".title-value").text(toolCards[i]["title"]);
+
+			costEffect.find(".food-value").text(toolCards[i]["costEffect"]["food"]);
+			costEffect.find(".happiness-value").text(toolCards[i]["costEffect"]["happiness"]);
+			costEffect.find(".money-value").text(toolCards[i]["costEffect"]["money"]);
+			costEffect.find(".education-value").text(toolCards[i]["costEffect"]["education"]);
+			costEffect.find(".military-value").text(toolCards[i]["costEffect"]["military"]);
+			costEffect.find(".population-value").text(toolCards[i]["costEffect"]["population"]);
+			costEffect.find(".cardsToRemove-value").text(toolCards[i]["costEffect"]["cardsToRemove"]);
+
+			selfEffect.find(".food-value").text(toolCards[i]["selfEffect"]["food"]);
+			selfEffect.find(".happiness-value").text(toolCards[i]["selfEffect"]["happiness"]);
+			selfEffect.find(".money-value").text(toolCards[i]["selfEffect"]["money"]);
+			selfEffect.find(".education-value").text(toolCards[i]["selfEffect"]["education"]);
+			selfEffect.find(".military-value").text(toolCards[i]["selfEffect"]["military"]);
+			selfEffect.find(".population-value").text(toolCards[i]["selfEffect"]["population"]);
+			selfEffect.find(".cardsToRemove-value").text(toolCards[i]["selfEffect"]["cardsToRemove"]);
+
+			opponentEffect.find(".food-value").text(toolCards[i]["opponentEffect"]["food"]);
+			opponentEffect.find(".happiness-value").text(toolCards[i]["opponentEffect"]["happiness"]);
+			opponentEffect.find(".money-value").text(toolCards[i]["opponentEffect"]["money"]);
+			opponentEffect.find(".education-value").text(toolCards[i]["opponentEffect"]["education"]);
+			opponentEffect.find(".military-value").text(toolCards[i]["opponentEffect"]["military"]);
+			opponentEffect.find(".population-value").text(toolCards[i]["opponentEffect"]["population"]);
+			opponentEffect.find(".cardsToRemove-value").text(toolCards[i]["opponentEffect"]["cardsToRemove"]);
+
+			display.find(".description-value").text(toolCards[i]["description"]);
+		}
 	}
 
 	function buildEventCardDisplay(eventCard)
@@ -267,12 +314,12 @@ $(function ()
 			if(players[i]["isComputer"] != true)
 			{
 				display = $(".player-section");
-				display.find(".food-value").text(players[i]["town"]["food"]);
-				display.find(".happiness-value").text(players[i]["town"]["happiness"]);
-				display.find(".money-value").text(players[i]["town"]["money"]);
-				display.find(".education-value").text(players[i]["town"]["education"]);
-				display.find(".military-value").text(players[i]["town"]["military"]);
-				display.find(".population-value").text(players[i]["town"]["population"]);
+				display.find(".status-display .food-value").text(players[i]["town"]["food"]);
+				display.find(".status-display .happiness-value").text(players[i]["town"]["happiness"]);
+				display.find(".status-display .money-value").text(players[i]["town"]["money"]);
+				display.find(".status-display .education-value").text(players[i]["town"]["education"]);
+				display.find(".status-display .military-value").text(players[i]["town"]["military"]);
+				display.find(".status-display .population-value").text(players[i]["town"]["population"]);
 
 				display.find(".name-value").text(playerNameAndTitle);
 			}
