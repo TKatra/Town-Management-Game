@@ -13,6 +13,7 @@ $(function ()
 		$(".pop-up").hide();
 		$(".error-message").hide();
 		$(".pop-up.pre-game").show();
+		$(".site-cover").show();
 
 		$("div.button.start-game").click(startGame);
 		requestData.commandLine = "preGameBuild";
@@ -149,6 +150,36 @@ $(function ()
 		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
 		console.log("updateData: ", updateData);
 		console.log("updateData(JSON.stringify): " + JSON.stringify(updateData));
+
+		$(".pop-up.pre-game").hide();
+		$(".site-cover").hide();
+
+		var players = updateData["world"]["players"];
+		var eventCard = updateData["world"]["currentEventCard"];
+
+
+		for (var i = 0; i < players.length; i++)
+		{
+			var playerNameAndTitle = players[i]["name"] + " the mayor of " + players[i]["town"]["name"] + " the " + players[i]["town"]["type"];
+			if(players[i]["isComputer"] != true)
+			{
+
+			}
+			else
+			{
+				var display = $("#opponent-" + players[i]["id"]);
+				display.find(".food-value").text(players[i]["town"]["food"]);
+				display.find(".happiness-value").text(players[i]["town"]["happiness"]);
+				display.find(".money-value").text(players[i]["town"]["money"]);
+				display.find(".education-value").text(players[i]["town"]["education"]);
+				display.find(".military-value").text(players[i]["town"]["military"]);
+				display.find(".population-value").text(players[i]["town"]["population"]);
+
+
+				display.find(".name-value").text(playerNameAndTitle);
+			}
+		}
+
 	}
 
 	siteStartup();
