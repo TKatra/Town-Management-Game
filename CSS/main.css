@@ -1,5 +1,7 @@
 body{
 	font-family: sans-serif;
+
+	background-color: #7db9e8;
 }
 
 h1, h2, h3, h4, p{
@@ -188,4 +190,36 @@ div.button:active{
 .opponent-area #opponent-2.opponent-display {
 	float: right;
 	border-left: 1px solid #000000;
+}
+
+.board-center {
+	/*margin: 5px 0 0;*/
+	height: 100px;
+	/*background-color: #AAAAAA;*/
+}
+
+.board-center .event-card{
+	margin: 0 auto;
+	height: 350px;
+	width: 250px;
+	text-align: center;
+	border: 3px solid #8e6c12;
+	border-radius: 10px;
+	background-color: #f3c64c;
+}
+
+.board-center .event-card {
+
+}
+
+
+
+.player-section{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 220px;
+	/*border-radius: 10px 10px 0 0;*/
+	border-top: 5px solid #000000;
+	background-color: #AAAAAA;
 }
