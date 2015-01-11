@@ -436,4 +436,31 @@ class World
 			$this->eventDeck = array_values($this->eventDeck);
 		}
 	}
+
+	public function toArray()
+	{
+		//*> protected $players = array();
+		// protected $playerQueue = array();
+		// protected $toolDeck = array();
+		// protected $toolDiscardPile = array();
+		// protected $eventDeck = array();
+		// protected $eventDiscardPile = array();
+		//*> protected $currentEventCard;
+		// protected $currentPlayerTurn;
+
+		$responseArray = array();
+		$responseArray["players"] = $this->objectsToArray($this->players);
+		$responseArray["currentEventCard"] = $this->currentEventCard->toArray();
+		return $responseArray;
+	}
+
+	protected function objectsToArray($objects)
+	{
+		$responseArray = array();
+		for ($i = 0; $i < count($objects); $i++)
+		{
+			$responseArray[] = $objects[$i]->toArray();
+		}
+		return $responseArray;
+	}
 }

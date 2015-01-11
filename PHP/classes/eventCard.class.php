@@ -38,4 +38,25 @@ class EventCard extends Card
 	{
 		return $this->startupEffect;
 	}
+
+	public function toArray()
+	{
+		// protected $title; //string
+		// protected $description; //string
+		// protected $winCondition; //Condition
+		// protected $loseCondition; //Condition
+		// protected $winEffect; //Effect
+		// protected $loseEffect; //Effect
+		// protected $startupEffect; //Effect
+
+		$responseArray = array();
+		$responseArray["title"] = $this->title;
+		$responseArray["description"] = $this->description;
+		$responseArray["winCondition"] = $this->winCondition->toArray();
+		$responseArray["loseCondition"] = $this->loseCondition->toArray();
+		$responseArray["winEffect"] = $this->winEffect->toArray();
+		$responseArray["loseEffect"] = $this->loseEffect->toArray();
+		$responseArray["startupEffect"] = $this->startupEffect->toArray();
+		return $responseArray;
+	}
 }

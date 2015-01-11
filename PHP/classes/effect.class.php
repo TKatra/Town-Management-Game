@@ -74,4 +74,25 @@ class Effect
 	{
 		return $this->cardsToRemove;
 	}
+
+	public function toArray()
+	{
+		// protected $food; //int
+		// protected $happiness; //int
+		// protected $money; //int
+		// protected $education; //int
+		// protected $military; //int
+		// protected $population; //int
+		// protected $cardsToRemove; //int
+
+		$responseArray = array();
+		$responseArray["food"] = $this->food;
+		$responseArray["happiness"] = $this->happiness;
+		$responseArray["money"] = $this->money;
+		$responseArray["education"] = $this->education;
+		$responseArray["military"] = $this->military;
+		$responseArray["population"] = $this->population;
+		$responseArray["cardsToRemove"] = $this->cardsToRemove;
+		return $responseArray;
+	}
 }

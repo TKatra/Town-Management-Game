@@ -92,4 +92,27 @@ class Town
 		}
 		return $number;
 	}
+
+	public function toArray()
+	{
+		// protected $name; //string
+		// protected $type; //string
+		// protected $food; //int
+		// protected $happiness; //int
+		// protected $money; //int
+		// protected $education; //int
+		// protected $military; //int
+		// protected $population; //int
+
+		$responseArray = array();
+		$responseArray["name"] = $this->name;
+		$responseArray["type"] = $this->type;
+		$responseArray["food"] = $this->food;
+		$responseArray["happiness"] = $this->happiness;
+		$responseArray["money"] = $this->money;
+		$responseArray["education"] = $this->education;
+		$responseArray["military"] = $this->military;
+		$responseArray["population"] = $this->population;
+		return $responseArray;
+	}
 }

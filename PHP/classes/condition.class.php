@@ -75,4 +75,16 @@ class Condition
 				break;
 		}
 	}
+
+	public function toArray()
+	{
+		// protected $conditionType; //string
+		// protected $statsType; //string
+		// protected $value; //int
+		$responseArray = array();
+		$responseArray["conditionType"] = $this->conditionType;
+		$responseArray["statsType"] = $this->statsType;
+		$responseArray["value"] = $this->value;
+		return $responseArray;
+	}
 }

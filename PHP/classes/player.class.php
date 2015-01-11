@@ -184,4 +184,28 @@ class Player
 			}
 		}
 	}
+
+	public function toArray()
+	{
+		// protected $name; //string 
+		// protected $town; //town
+		// protected $toolCards = array(); //array of ToolCards
+		// protected $discardPile = array(); //array of discarded ToolCards
+
+		$responseArray = array();
+		$responseArray["name"] = $this->name;
+		$responseArray["town"] = $this->town->toArray();
+		$responseArray["toolCards"] = $this->objectsToArray($this->toolCards);
+		return $responseArray;
+	}
+
+	protected function objectsToArray($objects)
+	{
+		$responseArray = array();
+		for ($i = 0; $i < count($objects); $i++)
+		{
+			$responseArray[] = $objects[$i]->toArray();
+		}
+		return $responseArray;
+	}
 }
