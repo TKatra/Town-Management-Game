@@ -52,7 +52,7 @@ class Player
 		$this->discardPile = array();
 	}
 
-	protected function canAffordToolCard($toolCard)
+	public function canAffordToolCard($toolCard)
 	{
 		$cost = $toolCard->getCostEffect();
 		$town = $this->town;
