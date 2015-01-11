@@ -231,7 +231,7 @@ div.button:active{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 240px;
+	height: 250px;
 	/*border-radius: 10px 10px 0 0;*/
 	border-top: 3px solid #000000;
 	background-color: #AAAAAA;
@@ -262,7 +262,7 @@ div.button:active{
 	display: inline-block;
 	cursor: pointer;
 	height: 200px;
-	width: 150px;
+	width: 170px;
 	text-align: center;
 	margin: 0 15px 0 0;
 	border: 3px solid #8e6c12;
@@ -277,21 +277,21 @@ div.button:active{
 
 .player-section .player-card-section .tool-card p{
 	display: inline-block;
-	font-size: 10px;
+	font-size: 12px;
 
 }
 
 .player-section .player-card-section .tool-card h2{
-	font-size: 15px;
+	font-size: 16px;
 	border-bottom: 1px solid #000000;
 }
 
 .player-section .player-card-section .tool-card h3{
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .player-section .player-card-section .tool-card .stats-icon{
-	height: 10px;
+	height: 12px;
 }
 
 .player-section .button-section {
