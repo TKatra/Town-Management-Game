@@ -30,11 +30,10 @@ else if($request["commandLine"] == "startNewGame")
 	// $request["playerSettings"]["townIndex"];
 	$townArray = $ds->towns[$request["playerSettings"]["townIndex"]];
 	$townArray["name"] = $request["playerSettings"]["townName"];
-
-
+	$newTown = new Town($townArray);
 
 	// $tempPlayer = new Player($request["playerSettings"]["name"], $townArray);
-	$ds->players[] = new Player($request["playerSettings"]["name"], $townArray);
+	$ds->players[] = new Player($request["playerSettings"]["playerName"], $newTown);
 
 	unset($ds->towns[$request["playerSettings"]["townIndex"]]);
 	$ds->towns = array_values($ds->towns);
@@ -82,15 +81,23 @@ function createComputerPlayers()
 
 	for ($i = 0; $i < 2; $i++) 
 	{
-		$randomNameIndex = mt_rand(0, count($DBPlayerNames) -1);
+		$randomPlayerNameIndex = mt_rand(0, count($DBPlayerNames) -1);
+		$randomTownNameIndex = mt_rand(0, count($DBTownNames) -1);
 		$randomTownIndex = mt_rand(0, count($ds->towns) -1);
 
-		$tempTown = $ds->towns[$randomTownIndex];
-		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomNameIndex]["name"], $tempTown);
+		$townArray = $ds->towns[$randomTownIndex];
+		$townArray["name"] = $DBTownNames[$randomTownNameIndex]["name"];
+		$newTown = new Town($townArray);
+
+		$tempPlayer = new ComputerPlayer($DBPlayerNames[$randomPlayerNameIndex]["name"], $newTown);
 		$ds->players[] = $tempPlayer;
 
-		unset($DBPlayerNames[$randomNameIndex]);
+		unset($DBPlayerNames[$randomPlayerNameIndex]);
 		$DBPlayerNames = array_values($DBPlayerNames);
+
+		unset($DBTownNames[$randomTownNameIndex]);
+		$DBTownNames = array_values($DBTownNames);
+
 		unset($ds->towns[$randomTownIndex]);
 		$ds->towns = array_values($ds->towns);
 	}
@@ -101,6 +108,7 @@ function createToolCards()
 	global $PDOHelper, $ds, $result;
 	$toolCards = array();
 
+	$DBToolCards = $PDOHelper->query("SELECT * FROM ToolCards");
 	for ($i = 0; $i < count($DBToolCards); $i++)
 	{
 		$query = "SELECT Effects.* 
@@ -180,12 +188,16 @@ function startNewGame()
 	global $PDOHelper, $ds, $result;
 
 	$toolDeck = createToolCards();
+	// var_dump($toolDeck);
+	// die();
 	$eventDeck = createEventCards();
 
-	var_dump($ds->players);
-	die();
+	
 
 	$ds->world = new World($ds->players, $toolDeck, $eventDeck);
+
+	var_dump($ds->world);
+	die();
 
 	startNewRound();
 }
