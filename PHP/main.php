@@ -47,6 +47,13 @@ else if($request["commandLine"] == "startNewGame")
 
 	startNewGame();
 }
+else if($request["commandLine"] == "useCard")
+{
+	for ($i = 0; $i < count($ds->world->getplayers()); $i++)
+	{
+		
+	}
+}
 
 ///////////////////////////////////////////////////////
 
