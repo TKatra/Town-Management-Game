@@ -149,9 +149,9 @@ div.button:active{
 	border-bottom: 1px solid #000000;
 }
 
-.opponent-area .opponent-display .top-display img {
+.opponent-area .opponent-display .top-display img.computer-profile-picture {
 	display: inline-block;
-	max-height: 150px;
+	/*max-height: 150px;*/
 	border-right: 1px solid #000000;
 	border-bottom: 1px solid #000000;
 }
