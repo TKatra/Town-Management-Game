@@ -126,6 +126,7 @@ div.button:active{
 }
 
 .opponent-area {
+	z-index: 2;
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -199,9 +200,9 @@ div.button:active{
 	border-left: 1px solid #000000;
 }
 
-
-
 .event-card{
+	z-index: 5;
+	position: relative;
 	margin: 0 auto;
 	overflow: auto;
 	height: 350px;
@@ -222,6 +223,7 @@ div.button:active{
 }
 
 .card-row {
+	padding: 0 0 5px;
 	border-bottom: 1px solid #000000;
 }
 
