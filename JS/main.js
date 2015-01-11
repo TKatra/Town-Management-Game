@@ -2,7 +2,8 @@ $(function ()
 {
 	var requestData = {
 		commandLine:null,
-		index:null,
+		cardIndex:null,
+		opponentIndex:null,
 		playerSettings:{
 			playerName:null,
 			townName:null,
@@ -163,7 +164,7 @@ $(function ()
 
 		buildPlayerDisplays(players);
 		buildEventCardDisplay(currentEventCard);
-		// buildToolCardDisplay(players["toolCards"]);
+
 		for(var i = 0; i < players.length; i++)
 		{
 			if(players[i]["isComputer"] == false)
@@ -183,6 +184,9 @@ $(function ()
 		for(var i = 0; i < toolCards.length; i++)
 		{
 			display = $("#tool-card-" + i);
+			display.data("cardIndex", i);
+			display.data("targetSelf", toolCards[i]["targetSelf"])
+
 			costEffect = display.find(".cost-effect");
 			selfEffect = display.find(".self-effect");
 			opponentEffect = display.find(".opponent-effect");
@@ -341,7 +345,19 @@ $(function ()
 
 	function useCard()
 	{
-		requestData
+		var card = $(this);
+
+		if(card.data("targetSelf") == true)
+		{
+			// requestData.opponentIndex = card.data("opponentIndex");
+			// requestData.cardIndex = card.data("cardIndex");
+			// requestData.commandLine = "useCard";
+			// contactPHP(requestData, updateBoard);
+		}
+		else
+		{
+
+		}
 	}
 
 	siteStartup();
