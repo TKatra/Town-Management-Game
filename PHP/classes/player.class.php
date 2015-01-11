@@ -56,7 +56,7 @@ class Player
 	{
 		$cost = $toolCard->getCostEffect();
 		$town = $this->town;
-		// $statsArray = $toolCard->
+		
 		if (!(($town->getFood() + $cost->getFood()) < 0))
 		{
 			if (!(($town->getHappiness() + $cost->getHappiness()) < 0))
