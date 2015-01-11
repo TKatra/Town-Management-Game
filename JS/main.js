@@ -28,7 +28,7 @@ $(function ()
 			success: successFunction,
 			error:function(data)
 			{
-				console.log(data.responseText);
+				console.log("AJAX ERROR: ", data.responseText);
 			}
 		});
 	}
@@ -146,7 +146,9 @@ $(function ()
 
 	function updateBoard(updateData)
 	{
+		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
 		console.log("updateData: ", updateData);
+		console.log("updateData(JSON.stringify): " + JSON.stringify(updateData));
 	}
 
 	siteStartup();
