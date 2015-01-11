@@ -2,6 +2,7 @@ $(function ()
 {
 	var requestData = {
 		commandLine:null,
+		index:null,
 		playerSettings:{
 			playerName:null,
 			townName:null,
@@ -16,6 +17,9 @@ $(function ()
 		$(".site-cover").show();
 
 		$("div.button.start-game").click(startGame);
+		$("div.button.restart-game").click(siteStartup);
+		$("div.tool-card").click(useCard);
+
 		requestData.commandLine = "preGameBuild";
 		contactPHP(requestData, buildTownList);
 	}
@@ -161,6 +165,11 @@ $(function ()
 		buildEventCardDisplay(currentEventCard);
 	}
 
+	function buildToolCardDisplay(toolCards)
+	{
+
+	}
+
 	function buildEventCardDisplay(eventCard)
 	{
 		var display = $(".event-card");
@@ -254,13 +263,22 @@ $(function ()
 		for (var i = 0; i < players.length; i++)
 		{
 			var playerNameAndTitle = players[i]["name"] + " the mayor of " + players[i]["town"]["name"] + " the " + players[i]["town"]["type"];
+			var display;
 			if(players[i]["isComputer"] != true)
 			{
+				display = $(".player-section");
+				display.find(".food-value").text(players[i]["town"]["food"]);
+				display.find(".happiness-value").text(players[i]["town"]["happiness"]);
+				display.find(".money-value").text(players[i]["town"]["money"]);
+				display.find(".education-value").text(players[i]["town"]["education"]);
+				display.find(".military-value").text(players[i]["town"]["military"]);
+				display.find(".population-value").text(players[i]["town"]["population"]);
 
+				display.find(".name-value").text(playerNameAndTitle);
 			}
 			else
 			{
-				var display = $("#opponent-" + players[i]["id"]);
+				display = $("#opponent-" + players[i]["id"]);
 				display.find(".food-value").text(players[i]["town"]["food"]);
 				display.find(".happiness-value").text(players[i]["town"]["happiness"]);
 				display.find(".money-value").text(players[i]["town"]["money"]);
@@ -272,6 +290,11 @@ $(function ()
 				display.find(".name-value").text(playerNameAndTitle);
 			}
 		}
+	}
+
+	function useCard()
+	{
+		requestData
 	}
 
 	siteStartup();
