@@ -155,9 +155,102 @@ $(function ()
 		$(".site-cover").hide();
 
 		var players = updateData["world"]["players"];
-		var eventCard = updateData["world"]["currentEventCard"];
+		var currentEventCard = updateData["world"]["currentEventCard"];
 
+		buildPlayerDisplays(players);
+		buildEventCardDisplay(currentEventCard);
+	}
 
+	function buildEventCardDisplay(eventCard)
+	{
+		var display = $(".event-card");
+		var winCondition = display.find(".win-condition");
+		var loseCondition = display.find(".lose-condition");
+		var startupEffect = display.find(".startup-effect");
+		var winEffect = display.find(".win-effect");
+		var loseEffect = display.find(".lose-effect");
+
+		display.find(".title-value").text(eventCard["title"]);
+
+		//winCondition
+		winCondition.find(".condition-type").text(conditionTypeToText(eventCard["winCondition"]["conditionType"]));
+		winCondition.find(".stats-type").attr({
+			"src": "Images/" + eventCard["winCondition"]["statsType"] + ".png",
+			"alt": eventCard["winCondition"]["statsType"],
+			"title": eventCard["winCondition"]["statsType"]
+		});
+
+		if(eventCard["winCondition"]["conditionType"] != "highestOfPlayers" && eventCard["winCondition"]["conditionType"] != "lowestOfPlayers")
+		{
+			winCondition.find(".condition-value").text(eventCard["winCondition"]["value"]);
+		}
+		else
+		{
+			winCondition.find(".condition-value").text("");
+		}
+		
+
+		//loseCondition
+		loseCondition.find(".condition-type").text(conditionTypeToText(eventCard["loseCondition"]["conditionType"]));
+		loseCondition.find(".stats-type").attr({
+			"src": "Images/" + eventCard["loseCondition"]["statsType"] + ".png",
+			"alt": eventCard["loseCondition"]["statsType"],
+			"title": eventCard["loseCondition"]["statsType"]
+		});
+		if(eventCard["loseCondition"]["conditionType"] != "highestOfPlayers" && eventCard["loseCondition"]["conditionType"] != "lowestOfPlayers")
+		{
+			loseCondition.find(".condition-value").text(eventCard["loseCondition"]["value"]);
+		}
+		else
+		{
+			loseCondition.find(".condition-value").text("");
+		}
+		
+
+		startupEffect.find(".food-value").text(eventCard["startupEffect"]["food"]);
+		startupEffect.find(".happiness-value").text(eventCard["startupEffect"]["happiness"]);
+		startupEffect.find(".money-value").text(eventCard["startupEffect"]["money"]);
+		startupEffect.find(".education-value").text(eventCard["startupEffect"]["education"]);
+		startupEffect.find(".military-value").text(eventCard["startupEffect"]["military"]);
+		startupEffect.find(".population-value").text(eventCard["startupEffect"]["population"]);
+		startupEffect.find(".cardsToRemove-value").text(eventCard["startupEffect"]["cardsToRemove"]);
+
+		winEffect.find(".food-value").text(eventCard["winEffect"]["food"]);
+		winEffect.find(".happiness-value").text(eventCard["winEffect"]["happiness"]);
+		winEffect.find(".money-value").text(eventCard["winEffect"]["money"]);
+		winEffect.find(".education-value").text(eventCard["winEffect"]["education"]);
+		winEffect.find(".military-value").text(eventCard["winEffect"]["military"]);
+		winEffect.find(".population-value").text(eventCard["winEffect"]["population"]);
+		winEffect.find(".cardsToRemove-value").text(eventCard["winEffect"]["cardsToRemove"]);
+
+		loseEffect.find(".food-value").text(eventCard["loseEffect"]["food"]);
+		loseEffect.find(".happiness-value").text(eventCard["loseEffect"]["happiness"]);
+		loseEffect.find(".money-value").text(eventCard["loseEffect"]["money"]);
+		loseEffect.find(".education-value").text(eventCard["loseEffect"]["education"]);
+		loseEffect.find(".military-value").text(eventCard["loseEffect"]["military"]);
+		loseEffect.find(".population-value").text(eventCard["loseEffect"]["population"]);
+		loseEffect.find(".cardsToRemove-value").text(eventCard["loseEffect"]["cardsToRemove"]);
+
+		display.find(".description-value").text(eventCard["description"]);
+	}
+
+	function conditionTypeToText(conditionType)
+	{
+		switch (conditionType)
+		{
+			case "highestOfPlayers":
+				return "Being the highest of all towns in:";
+			case "lowestOfPlayers":
+				return "Being the lowest of all towns in:";
+			case "equalOrMoreThanValue":
+				return "Have the same or higher than:";
+			case "lessThanValue":
+				return "Have less than:";
+		}
+	}
+
+	function buildPlayerDisplays(players)
+	{
 		for (var i = 0; i < players.length; i++)
 		{
 			var playerNameAndTitle = players[i]["name"] + " the mayor of " + players[i]["town"]["name"] + " the " + players[i]["town"]["type"];
@@ -179,7 +272,6 @@ $(function ()
 				display.find(".name-value").text(playerNameAndTitle);
 			}
 		}
-
 	}
 
 	siteStartup();
