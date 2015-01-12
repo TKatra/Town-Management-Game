@@ -1,24 +1,29 @@
 $(function ()
 {
-	var requestData = {
-		commandLine:null,
-		cardIndex:null,
-		opponentIndex:null,
-		playerSettings:{
-			playerName:null,
-			townName:null,
-			townIndex: null
-		}
-	};
+	var requestData;
+
 	function siteStartup()
 	{
+		requestData = {
+			commandLine:null,
+			cardIndex:null,
+			opponentIndex:null,
+			playerSettings:{
+				playerName:null,
+				townName:null,
+				townIndex: null
+			}
+		};
+
 		$(".pop-up").hide();
 		$(".error-message").hide();
-		$(".pop-up.pre-game").show();
-		$(".site-cover").show();
+		$(".site-cover").hide();
+
+		$(".pop-up.pre-game").show(500);
+		$(".site-cover").fadeIn(500);
 
 		$("div.button.start-game").click(startGame);
-		$("div.button.restart-game").click(siteStartup);
+		// $("div.button.restart-game").click(siteStartup);
 		$("div.tool-card").click(useCard);
 
 		requestData.commandLine = "preGameBuild";
@@ -41,10 +46,10 @@ $(function ()
 
 	function buildTownList(townData)
 	{
-		console.log("townData" + townData);
-		console.log("townData(JSON.stringify): " + JSON.stringify(townData));
-		console.log("townData.towns[0].type: " + townData.towns[0].type);
-		console.log("townData.towns.length: ", townData.towns.length);
+		// console.log("townData" + townData);
+		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
+		// console.log("townData.towns[0].type: " + townData.towns[0].type);
+		// console.log("townData.towns.length: ", townData.towns.length);
 
 		for (var i = 0; i < townData.towns.length; i++)
 		{
@@ -103,16 +108,16 @@ $(function ()
 		}
 		else
 		{
-			console.log("Selected town index: ", $(".town-list-item.selected").data("index"));
+			// console.log("Selected town index: ", $(".town-list-item.selected").data("index"));
 			townIndex = $(".town-list-item.selected").data("index");
 		}
 
-		console.log("playerName: ", playerName);
-		console.log("townName: ", townName);
-		console.log("townIndex: ", townIndex);
+		// console.log("playerName: ", playerName);
+		// console.log("townName: ", townName);
+		// console.log("townIndex: ", townIndex);
 
-		console.log("textBoxesValid: ", textBoxesValid);
-		console.log("townSelectionValid: ", townSelectionValid);
+		// console.log("textBoxesValid: ", textBoxesValid);
+		// console.log("townSelectionValid: ", townSelectionValid);
 
 		if(textBoxesValid === true && townSelectionValid === true)
 		{
@@ -124,7 +129,7 @@ $(function ()
 			requestData.playerSettings.playerName = playerName;
 			requestData.playerSettings.townName = townName;
 			requestData.playerSettings.townIndex = townIndex;
-			console.log("requestData: ", requestData);
+			// console.log("requestData: ", requestData);
 			contactPHP(requestData, updateBoard);
 		}
 		else 
@@ -153,25 +158,17 @@ $(function ()
 	function updateBoard(updateData)
 	{
 		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
-		console.log("updateData: ", updateData);
-		console.log("updateData(JSON.stringify): " + JSON.stringify(updateData));
+		// console.log("updateData: ", updateData);
+		// console.log("updateData(JSON.stringify): " + JSON.stringify(updateData));
 
-		$(".pop-up.pre-game").hide();
-		$(".site-cover").hide();
+		$(".pop-up.pre-game").hide(500);
+		$(".site-cover").fadeOut(500);
 
 		var players = updateData["world"]["players"];
 		var currentEventCard = updateData["world"]["currentEventCard"];
 
 		buildPlayerDisplays(players);
 		buildEventCardDisplay(currentEventCard);
-
-		for(var i = 0; i < players.length; i++)
-		{
-			if(players[i]["isComputer"] == false)
-			{
-				buildToolCardDisplay(players[i]["toolCards"]);
-			}
-		}
 	}
 
 	function buildToolCardDisplay(toolCards)
@@ -311,6 +308,7 @@ $(function ()
 
 	function buildPlayerDisplays(players)
 	{
+		$(".cards-on-hand").html("");
 		for (var i = 0; i < players.length; i++)
 		{
 			var playerNameAndTitle = players[i]["name"] + " the mayor of " + players[i]["town"]["name"] + " the " + players[i]["town"]["type"];
@@ -326,6 +324,8 @@ $(function ()
 				display.find(".status-display .population-value").text(players[i]["town"]["population"]);
 
 				display.find(".name-value").text(playerNameAndTitle);
+
+				buildToolCardDisplay(players[i]["toolCards"]);
 			}
 			else
 			{
@@ -337,6 +337,18 @@ $(function ()
 				display.find(".military-value").text(players[i]["town"]["military"]);
 				display.find(".population-value").text(players[i]["town"]["population"]);
 
+				// console.log("Computer - cards on hand: " ,players[i]["toolCardsInDeck"]);
+				for(var j = 0; j < players[i]["toolCardsInDeck"]; j++)//
+				{
+					// console.log("Shit stain");
+					var cardImage = $("<img>").attr(
+					{
+						"src" : "Images/cardOnHand.png",
+						"alt" : "Card on hand",
+						"title" : "Card on hand"
+					});
+					display.find(".cards-on-hand").append(cardImage);
+				}
 
 				display.find(".name-value").text(playerNameAndTitle);
 			}
@@ -349,15 +361,17 @@ $(function ()
 
 		if(card.data("targetSelf") == true)
 		{
-			// requestData.opponentIndex = card.data("opponentIndex");
-			// requestData.cardIndex = card.data("cardIndex");
-			// requestData.commandLine = "useCard";
-			// contactPHP(requestData, updateBoard);
+			console.log("targetSelf = true");
+			requestData.opponentIndex = null;
 		}
 		else
 		{
-
+			console.log("targetSelf = false");
+			requestData.opponentIndex = card.data("opponentIndex");
 		}
+			requestData.cardIndex = card.data("cardIndex");
+			requestData.commandLine = "useToolCard";
+			contactPHP(requestData, updateBoard);
 	}
 
 	siteStartup();
