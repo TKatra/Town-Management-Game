@@ -14,6 +14,9 @@ $PDOHelper = new PDOHelper($connectInfo["host"], $connectInfo["dbname"], $connec
 $ds = new DBObjectSaver($connectInfo);
 $result = array();
 
+// var_dump($ds->world[0]);
+// die();
+
 if($request["commandLine"] == "preGameBuild")
 {
 	resetValues();
@@ -47,12 +50,109 @@ else if($request["commandLine"] == "startNewGame")
 
 	startNewGame();
 }
-else if($request["commandLine"] == "useCard")
+else if($request["commandLine"] == "useToolCard")
 {
-	for ($i = 0; $i < count($ds->world->getplayers()); $i++)
+	var_dump($ds->world[0]->toArray());
+	die();
+	for ($i = 0; $i < count($ds->world[0]->getplayers()); $i++)
 	{
-		
+		if(is_a($ds->world[0]->getplayers()[$i], "Player"))
+		{
+			var_dump($ds->world[0]->getplayers()[$i]);
+			die();
+		}
 	}
+}
+
+///////////////////////////////////////////////////////
+
+function startNewGame()
+{
+	global $PDOHelper, $ds, $result;
+
+	$toolDeck = createToolCards();
+	$eventDeck = createEventCards();
+
+	
+
+	$ds->world[0] = new World($ds->players, $toolDeck, $eventDeck);
+
+
+
+	startNewRound();
+}
+
+function startNewRound()
+{
+	global $PDOHelper, $ds, $result;
+
+	$ds->world[0]->dealToolCards();
+	$ds->world[0]->takeAnEventCard();
+
+	// var_dump($ds->world[0]->toArray());
+	// die();
+
+	for ($i = 0; $i < count($ds->world[0]->getPlayerQueue()); $i++)
+	{
+		$ds->world[0]->activateEffect($ds->world[0]->getCurrentEventCard()->getStartupEffect(), $ds->world[0]->getplayers()[$i]);
+	}
+
+	$ds->world[0]->resetCurrentPlayerTurn();
+
+
+	$result["world"] = $ds->world[0]->toArray();
+
+	// var_dump($result);
+	// die();
+
+	echo(json_encode($result));
+	exit();
+}
+
+function endTurn()
+{
+	global $PDOHelper, $ds, $result;
+
+	$ds->world[0]->fetchDiscardedCards($ds->world[0]->getcurrentPlayerTurn());
+	$ds->world[0]->nextPlayerTurn();
+
+	if(!($ds->world[0]->getCurrentPlayerTurn() < count($ds->world[0]->getPlayerQueue())))
+	{
+		$ds->world[0]->endRound();
+	}
+}
+
+function endRound()
+{
+	global $PDOHelper, $ds, $result;
+
+	for ($i = 0; $i < count($ds->world[0]->getPlayerQueue()); $i++)
+	{
+		if($ds->world[0]->hasPassedCondition($ds->world[0]->getCurrentEventCard()->getWinCondition(),$ds->world[0]->getPlayerQueue()[$i]) == true)
+		{
+			$ds->world[0]->activateEffect($ds->world[0]->getCurrentEventCard()->getWinEffect(), $ds->world[0]->getPlayerQueue()[$i]);
+		}
+		else if($ds->world[0]->hasPassedCondition($ds->world[0]->getCurrentEventCard()->getLoseCondition(),$ds->world[0]->getPlayerQueue()[$i]) == true)
+		{
+			$ds->world[0]->activateEffect($ds->world[0]->getCurrentEventCard()->getLoseEffect(), $ds->world[0]->getPlayerQueue()[$i]);
+		}
+	}
+
+	if($ds->world[0]->checkForWinners() == true)
+	{
+		$ds->world[0]->gameOver();
+	}
+	else
+	{
+		startNewRound();
+	}
+}
+
+function gameOver()
+{
+	global $PDOHelper, $ds, $result;
+
+
 }
 
 ///////////////////////////////////////////////////////
@@ -70,9 +170,9 @@ function resetValues()
 		unset($ds->towns);
 	}
 
-	if(count($ds->world))
+	if(count($ds->world[0]))
 	{
-		unset($ds->world);
+		unset($ds->world[0]);
 	}
 }
 
@@ -193,95 +293,6 @@ function createEventCards()
 		$eventCards[] = $tempEventCard;
 	}
 	return $eventCards;
-}
-
-function startNewGame()
-{
-	global $PDOHelper, $ds, $result;
-
-	$toolDeck = createToolCards();
-	$eventDeck = createEventCards();
-
-	
-
-	$ds->world = new World($ds->players, $toolDeck, $eventDeck);
-
-
-
-	startNewRound();
-}
-
-function startNewRound()
-{
-	global $PDOHelper, $ds, $result;
-
-	$ds->world->dealToolCards();
-	$ds->world->takeAnEventCard();
-
-	// var_dump($ds->world->toArray());
-	// die();
-
-	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
-	{
-		$ds->world->activateEffect($ds->world->getCurrentEventCard()->getStartupEffect(), $ds->world->getplayers()[$i]);
-	}
-
-	$ds->world->resetCurrentPlayerTurn();
-
-
-	$result["world"] = $ds->world->toArray();
-
-	// var_dump($result);
-	// die();
-
-	echo(json_encode($result));
-	exit();
-}
-
-function endTurn()
-{
-	global $PDOHelper, $ds, $result;
-
-	$ds->world->fetchDiscardedCards($ds->world->getcurrentPlayerTurn());
-	$ds->world->nextPlayerTurn();
-
-	if(!($ds->world->getCurrentPlayerTurn() < count($ds->world->getPlayerQueue())))
-	{
-		$ds->world->endRound();
-	}
-}
-
-function endRound()
-{
-	global $PDOHelper, $ds, $result;
-
-	for ($i = 0; $i < count($ds->world->getPlayerQueue()); $i++)
-	{
-		if($ds->world->hasPassedCondition($ds->world->getCurrentEventCard()->getWinCondition(),$ds->world->getPlayerQueue()[$i]) == true)
-		{
-			$ds->world->activateEffect($ds->world->getCurrentEventCard()->getWinEffect(), $ds->world->getPlayerQueue()[$i]);
-		}
-		else if($ds->world->hasPassedCondition($ds->world->getCurrentEventCard()->getLoseCondition(),$ds->world->getPlayerQueue()[$i]) == true)
-		{
-			$ds->world->activateEffect($ds->world->getCurrentEventCard()->getLoseEffect(), $ds->world->getPlayerQueue()[$i]);
-		}
-	}
-
-	if($ds->world->checkForWinners() == true)
-	{
-		$ds->world->gameOver();
-	}
-	else
-	{
-		startNewRound();
-	}
-}
-
-function gameOver()
-{
-	global $PDOHelper, $ds, $result;
-
-
 }
 
 ?>
