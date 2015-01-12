@@ -178,9 +178,16 @@ div.button:active{
 	bottom: 5px;
 }
 
+.opponent-area .opponent-display .card-section{
+	border-top: 1px solid #000000;
+	width: 100%;
+	text-align: center;
+}
+
 .opponent-area .opponent-display .lower-display{
 	text-align: center;
 	height: auto;
+
 }
 .opponent-area .opponent-display .lower-display p {
 	/*padding: 15% 0 0;*/
