@@ -262,7 +262,7 @@ div.button:active{
 	display: inline-block;
 	cursor: pointer;
 	height: 200px;
-	width: 170px;
+	width: 190px;
 	text-align: center;
 	margin: 0 15px 0 0;
 	border: 3px solid #8e6c12;
@@ -277,21 +277,21 @@ div.button:active{
 
 .player-section .player-card-section .tool-card p{
 	display: inline-block;
-	font-size: 12px;
+	font-size: 13px;
 
 }
 
 .player-section .player-card-section .tool-card h2{
-	font-size: 16px;
+	font-size: 20px;
 	border-bottom: 1px solid #000000;
 }
 
 .player-section .player-card-section .tool-card h3{
-	font-size: 14px;
+	font-size: 17px;
 }
 
 .player-section .player-card-section .tool-card .stats-icon{
-	height: 12px;
+	height: 15px;
 }
 
 .player-section .button-section {
