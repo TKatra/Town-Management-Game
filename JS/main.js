@@ -1,9 +1,10 @@
 $(function ()
 {
 	var requestData;
-	$("div.button.start-game").click(startGame);
-	$("div.tool-card").click(useCard);
-	$("div.button.restart-game").click(siteStartup);
+	$("div.button.button-start-game").click(startGame);
+	// $("div.tool-card").click(cardOnClick);
+	$("div.button.button-restart-game").click(siteStartup);
+
 
 	function siteStartup()
 	{
@@ -177,122 +178,118 @@ $(function ()
 
 	function buildToolCardDisplay(toolCards)
 	{
-		var display;
-		var costEffect;
-		var selfEffect;
-		var opponentEffect;
+		var cardSection = $(".player-card-section");
+		var newToolCard;
+		var descriptionRow;
 
 		for(var i = 0; i < toolCards.length; i++)
 		{
-			display = $("#tool-card-" + i);
-			display.data("cardIndex", i);
-			display.data("targetSelf", toolCards[i]["targetSelf"])
+			// toolCard = $("#tool-card-" + i);
+			newToolCard = $("<div>").addClass("tool-card");
+			newToolCard.data("cardIndex", i);
+			newToolCard.data("targetSelf", toolCards[i]["targetSelf"]);
 
-			costEffect = display.find(".cost-effect");
-			selfEffect = display.find(".self-effect");
-			opponentEffect = display.find(".opponent-effect");
+			newToolCard.append($("<h2>").text(toolCards[i]["title"]));
 
-			display.find(".title-value").text(toolCards[i]["title"]);
+			newToolCard.append(buildCardEffectRow("Cost", toolCards[i]["costEffect"]));
+			newToolCard.append(buildCardEffectRow("Self Effect", toolCards[i]["selfEffect"]));
+			newToolCard.append(buildCardEffectRow("Opponent Effect", toolCards[i]["opponentEffect"]));
 
-			costEffect.find(".food-value").text(toolCards[i]["costEffect"]["food"]);
-			costEffect.find(".happiness-value").text(toolCards[i]["costEffect"]["happiness"]);
-			costEffect.find(".money-value").text(toolCards[i]["costEffect"]["money"]);
-			costEffect.find(".education-value").text(toolCards[i]["costEffect"]["education"]);
-			costEffect.find(".military-value").text(toolCards[i]["costEffect"]["military"]);
-			costEffect.find(".population-value").text(toolCards[i]["costEffect"]["population"]);
-			costEffect.find(".cardsToRemove-value").text(toolCards[i]["costEffect"]["cardsToRemove"]);
+			descriptionRow = $("<section>").addClass("card-row");
+			descriptionRow.append($("<h3>").text("Description"));
+			descriptionRow.append($("<p>").text(toolCards[i]["description"]));
+			newToolCard.append(descriptionRow);
 
-			selfEffect.find(".food-value").text(toolCards[i]["selfEffect"]["food"]);
-			selfEffect.find(".happiness-value").text(toolCards[i]["selfEffect"]["happiness"]);
-			selfEffect.find(".money-value").text(toolCards[i]["selfEffect"]["money"]);
-			selfEffect.find(".education-value").text(toolCards[i]["selfEffect"]["education"]);
-			selfEffect.find(".military-value").text(toolCards[i]["selfEffect"]["military"]);
-			selfEffect.find(".population-value").text(toolCards[i]["selfEffect"]["population"]);
-			selfEffect.find(".cardsToRemove-value").text(toolCards[i]["selfEffect"]["cardsToRemove"]);
-
-			opponentEffect.find(".food-value").text(toolCards[i]["opponentEffect"]["food"]);
-			opponentEffect.find(".happiness-value").text(toolCards[i]["opponentEffect"]["happiness"]);
-			opponentEffect.find(".money-value").text(toolCards[i]["opponentEffect"]["money"]);
-			opponentEffect.find(".education-value").text(toolCards[i]["opponentEffect"]["education"]);
-			opponentEffect.find(".military-value").text(toolCards[i]["opponentEffect"]["military"]);
-			opponentEffect.find(".population-value").text(toolCards[i]["opponentEffect"]["population"]);
-			opponentEffect.find(".cardsToRemove-value").text(toolCards[i]["opponentEffect"]["cardsToRemove"]);
-
-			display.find(".description-value").text(toolCards[i]["description"]);
+			cardSection.append(newToolCard);
 		}
 	}
 
+	
+
+	
+
 	function buildEventCardDisplay(eventCard)
 	{
-		var display = $(".event-card");
-		var winCondition = display.find(".win-condition");
-		var loseCondition = display.find(".lose-condition");
-		var startupEffect = display.find(".startup-effect");
-		var winEffect = display.find(".win-effect");
-		var loseEffect = display.find(".lose-effect");
+		var newEventCard = $(".event-card");
+		// var winCondition = display.find(".win-condition");
+		// var loseCondition = display.find(".lose-condition");
+		var descriptionRow = $("<section>").addClass("card-row");
+		// var startupEffect = display.find(".startup-effect");
+		// var winEffect = display.find(".win-effect");
+		// var loseEffect = display.find(".lose-effect");
 
-		display.find(".title-value").text(eventCard["title"]);
+		newEventCard.append($("<h2>").text(eventCard["title"]));
 
-		//winCondition
-		winCondition.find(".condition-type").text(conditionTypeToText(eventCard["winCondition"]["conditionType"]));
-		winCondition.find(".stats-type").attr({
-			"src": "Images/" + eventCard["winCondition"]["statsType"] + ".png",
-			"alt": eventCard["winCondition"]["statsType"],
-			"title": eventCard["winCondition"]["statsType"]
-		});
+		// //winCondition
+		// winCondition.find(".condition-type").text(conditionTypeToText(eventCard["winCondition"]["conditionType"]));
+		// winCondition.find(".stats-type").attr({
+		// 	"src": "Images/" + eventCard["winCondition"]["statsType"] + ".png",
+		// 	"alt": eventCard["winCondition"]["statsType"],
+		// 	"title": eventCard["winCondition"]["statsType"]
+		// });
 
-		if(eventCard["winCondition"]["conditionType"] != "highestOfPlayers" && eventCard["winCondition"]["conditionType"] != "lowestOfPlayers")
-		{
-			winCondition.find(".condition-value").text(eventCard["winCondition"]["value"]);
-		}
-		else
-		{
-			winCondition.find(".condition-value").text("");
-		}
+		// if(eventCard["winCondition"]["conditionType"] != "highestOfPlayers" && eventCard["winCondition"]["conditionType"] != "lowestOfPlayers")
+		// {
+		// 	winCondition.find(".condition-value").text(eventCard["winCondition"]["value"]);
+		// }
+		// else
+		// {
+		// 	winCondition.find(".condition-value").text("");
+		// }
 		
 
-		//loseCondition
-		loseCondition.find(".condition-type").text(conditionTypeToText(eventCard["loseCondition"]["conditionType"]));
-		loseCondition.find(".stats-type").attr({
-			"src": "Images/" + eventCard["loseCondition"]["statsType"] + ".png",
-			"alt": eventCard["loseCondition"]["statsType"],
-			"title": eventCard["loseCondition"]["statsType"]
-		});
-		if(eventCard["loseCondition"]["conditionType"] != "highestOfPlayers" && eventCard["loseCondition"]["conditionType"] != "lowestOfPlayers")
-		{
-			loseCondition.find(".condition-value").text(eventCard["loseCondition"]["value"]);
-		}
-		else
-		{
-			loseCondition.find(".condition-value").text("");
-		}
-		
+		// //loseCondition
+		// loseCondition.find(".condition-type").text(conditionTypeToText(eventCard["loseCondition"]["conditionType"]));
+		// loseCondition.find(".stats-type").attr({
+		// 	"src": "Images/" + eventCard["loseCondition"]["statsType"] + ".png",
+		// 	"alt": eventCard["loseCondition"]["statsType"],
+		// 	"title": eventCard["loseCondition"]["statsType"]
+		// });
+		// if(eventCard["loseCondition"]["conditionType"] != "highestOfPlayers" && eventCard["loseCondition"]["conditionType"] != "lowestOfPlayers")
+		// {
+		// 	loseCondition.find(".condition-value").text(eventCard["loseCondition"]["value"]);
+		// }
+		// else
+		// {
+		// 	loseCondition.find(".condition-value").text("");
+		// }
 
-		startupEffect.find(".food-value").text(eventCard["startupEffect"]["food"]);
-		startupEffect.find(".happiness-value").text(eventCard["startupEffect"]["happiness"]);
-		startupEffect.find(".money-value").text(eventCard["startupEffect"]["money"]);
-		startupEffect.find(".education-value").text(eventCard["startupEffect"]["education"]);
-		startupEffect.find(".military-value").text(eventCard["startupEffect"]["military"]);
-		startupEffect.find(".population-value").text(eventCard["startupEffect"]["population"]);
-		startupEffect.find(".cardsToRemove-value").text(eventCard["startupEffect"]["cardsToRemove"]);
 
-		winEffect.find(".food-value").text(eventCard["winEffect"]["food"]);
-		winEffect.find(".happiness-value").text(eventCard["winEffect"]["happiness"]);
-		winEffect.find(".money-value").text(eventCard["winEffect"]["money"]);
-		winEffect.find(".education-value").text(eventCard["winEffect"]["education"]);
-		winEffect.find(".military-value").text(eventCard["winEffect"]["military"]);
-		winEffect.find(".population-value").text(eventCard["winEffect"]["population"]);
-		winEffect.find(".cardsToRemove-value").text(eventCard["winEffect"]["cardsToRemove"]);
 
-		loseEffect.find(".food-value").text(eventCard["loseEffect"]["food"]);
-		loseEffect.find(".happiness-value").text(eventCard["loseEffect"]["happiness"]);
-		loseEffect.find(".money-value").text(eventCard["loseEffect"]["money"]);
-		loseEffect.find(".education-value").text(eventCard["loseEffect"]["education"]);
-		loseEffect.find(".military-value").text(eventCard["loseEffect"]["military"]);
-		loseEffect.find(".population-value").text(eventCard["loseEffect"]["population"]);
-		loseEffect.find(".cardsToRemove-value").text(eventCard["loseEffect"]["cardsToRemove"]);
 
-		display.find(".description-value").text(eventCard["description"]);
+
+		newEventCard.append(buildCardEffectRow("Startup Effect", eventCard["startupEffect"]));
+		newEventCard.append(buildCardEffectRow("Win Effect", eventCard["winEffect"]));
+		newEventCard.append(buildCardEffectRow("Lose Effect", eventCard["loseEffect"]));
+
+		descriptionRow.append($("<h3>").text("Description"));
+		descriptionRow.append($("<p>").text(eventCard["description"]));
+		newEventCard.append(descriptionRow);
+		// startupEffect.find(".food-value").text(eventCard["startupEffect"]["food"]);
+		// startupEffect.find(".happiness-value").text(eventCard["startupEffect"]["happiness"]);
+		// startupEffect.find(".money-value").text(eventCard["startupEffect"]["money"]);
+		// startupEffect.find(".education-value").text(eventCard["startupEffect"]["education"]);
+		// startupEffect.find(".military-value").text(eventCard["startupEffect"]["military"]);
+		// startupEffect.find(".population-value").text(eventCard["startupEffect"]["population"]);
+		// startupEffect.find(".cardsToRemove-value").text(eventCard["startupEffect"]["cardsToRemove"]);
+
+		// winEffect.find(".food-value").text(eventCard["winEffect"]["food"]);
+		// winEffect.find(".happiness-value").text(eventCard["winEffect"]["happiness"]);
+		// winEffect.find(".money-value").text(eventCard["winEffect"]["money"]);
+		// winEffect.find(".education-value").text(eventCard["winEffect"]["education"]);
+		// winEffect.find(".military-value").text(eventCard["winEffect"]["military"]);
+		// winEffect.find(".population-value").text(eventCard["winEffect"]["population"]);
+		// winEffect.find(".cardsToRemove-value").text(eventCard["winEffect"]["cardsToRemove"]);
+
+		// loseEffect.find(".food-value").text(eventCard["loseEffect"]["food"]);
+		// loseEffect.find(".happiness-value").text(eventCard["loseEffect"]["happiness"]);
+		// loseEffect.find(".money-value").text(eventCard["loseEffect"]["money"]);
+		// loseEffect.find(".education-value").text(eventCard["loseEffect"]["education"]);
+		// loseEffect.find(".military-value").text(eventCard["loseEffect"]["military"]);
+		// loseEffect.find(".population-value").text(eventCard["loseEffect"]["population"]);
+		// loseEffect.find(".cardsToRemove-value").text(eventCard["loseEffect"]["cardsToRemove"]);
+
+		// newEventCard.find(".description-value").text(eventCard["description"]);
 	}
 
 	function conditionTypeToText(conditionType)
@@ -308,6 +305,65 @@ $(function ()
 			case "lessThanValue":
 				return "Have less than:";
 		}
+	}
+
+	function buildCardEffectRow(label, effects)
+	{
+		var anyEffects = false;
+		var newRow = $("<section>").addClass("card-row");
+		newRow.append($("<h3>").text(label));
+
+		for(var effect in effects)
+		{
+			if (effects[effect] !== 0)
+			{
+				anyEffects = true;
+				newRow.append(buildStats(effect, effects[effect]));
+			}
+		}
+
+		if (anyEffects === true)
+		{
+			// console.log("newRow: ", newRow);
+			return newRow;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function buildStats(statsType, value)
+	{
+		var newStat = $("<section>").addClass("stats");
+		var statText = camelCaseToNormalCase(statsType);
+		// console.log("newStat, at start: ", newStat);
+		newStat.append($("<img>").attr(
+			{
+				"src" : "Images/" + statsType + ".png",
+				"alt" : statText,
+				"title" : statText
+			}));
+		// console.log("newStat, after imege added: ", newStat);
+		// if(showValue === true)
+		// {
+			// console.log("value:", value);
+			newStat.append($("<p>").text(value));
+		// }
+		// console.log("newStat, before return: ", newStat);
+		return newStat;
+	}
+
+	function camelCaseToNormalCase(inputString)
+	{
+		inputString = inputString.replace(/([A-Z])/g, ' $1');
+		inputString = inputString.toLowerCase();
+		inputString = inputString.replace(/^./, function(str)
+				{
+					return str.toUpperCase();
+				});
+
+		return inputString;
 	}
 
 	function buildPlayerDisplays(players)
@@ -359,31 +415,46 @@ $(function ()
 		}
 	}
 
+	function cardOnClick()
+	{
+		$(".site-cover").fadeIn(500);
+		$(".pop-up.use-card").show(500);
+
+		var card = $(this);
+
+		requestData.cardIndex = card.data("cardIndex");
+	}
+
 	function useCard()
 	{
-		var card = $(this);
+		
+
+		
+
+
 
 		if(card.data("targetSelf") == true)
 		{
 			console.log("targetSelf = true");
 			requestData.opponentIndex = null;
+			
+			requestData.commandLine = "useToolCard";
+			contactPHP(requestData, updateBoard);
 		}
 		else
 		{
 			console.log("targetSelf = false");
-			requestData.opponentIndex = card.data("opponentIndex");
-			pickTarget()
+			// requestData.opponentIndex = ;
+			// pickTargetPopup();
 		}
-
-			requestData.cardIndex = card.data("cardIndex");
-			requestData.commandLine = "useToolCard";
-			contactPHP(requestData, updateBoard);
 	}
 
 	function pickTarget()
 	{
-		$(".pop-up.pre-game").show(500);
-		$(".site-cover").fadeIn(500);
+		// $(".site-cover").fadeIn(500);
+		// $(".pop-up.use-card").show(500);
+		
+		// requestData.opponentIndex = ;
 	}
 
 	siteStartup();
