@@ -40,6 +40,13 @@ div.button {
 	border:1px solid #000000;
 	border-radius: 25px;
 	background-color: #d79b39;
+
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 div.button:hover{
@@ -48,6 +55,20 @@ div.button:hover{
 
 div.button:active{
 	background-color: #ffc66b;
+}
+
+.stats{
+	display: inline-block;
+}
+
+.stats p{
+	display: inline-block;
+	margin: 0 5px;
+
+}
+
+.stats img{
+	display: inline-block;
 }
 
 .site-cover {
@@ -234,6 +255,7 @@ div.button:active{
 	border-bottom: 1px solid #000000;
 }
 
+
 .player-section{
 	position: absolute;
 	bottom: 0;
@@ -282,6 +304,10 @@ div.button:active{
 	background-color: #f5d479;
 }
 
+.player-section .player-card-section .tool-card .card-row:last-child{
+	border-bottom: 0;
+}
+
 .player-section .player-card-section .tool-card p{
 	display: inline-block;
 	font-size: 13px;
@@ -297,7 +323,7 @@ div.button:active{
 	font-size: 17px;
 }
 
-.player-section .player-card-section .tool-card .stats-icon{
+.player-section .player-card-section .tool-card .stats img{
 	height: 15px;
 }
 
