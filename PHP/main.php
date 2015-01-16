@@ -52,13 +52,13 @@ else if($request["commandLine"] == "startNewGame")
 }
 else if($request["commandLine"] == "useToolCard")
 {
-	var_dump($ds->world[0]->toArray());
-	die();
+	// var_dump($request);
+	// die();
 	for ($i = 0; $i < count($ds->world[0]->getplayers()); $i++)
 	{
 		if(is_a($ds->world[0]->getplayers()[$i], "Player"))
 		{
-			var_dump($ds->world[0]->getplayers()[$i]);
+			var_dump($ds->world[0]->getplayers()[$i]->getToolCards()[$request["cardIndex"]]);
 			die();
 		}
 	}
