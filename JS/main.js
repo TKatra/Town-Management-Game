@@ -1,6 +1,9 @@
 $(function ()
 {
 	var requestData;
+	$("div.button.start-game").click(startGame);
+	$("div.tool-card").click(useCard);
+	$("div.button.restart-game").click(siteStartup);
 
 	function siteStartup()
 	{
@@ -19,12 +22,11 @@ $(function ()
 		$(".error-message").hide();
 		$(".site-cover").hide();
 
-		$(".pop-up.pre-game").show(500);
-		$(".site-cover").fadeIn(500);
+		
 
-		$("div.button.start-game").click(startGame);
-		// $("div.button.restart-game").click(siteStartup);
-		$("div.tool-card").click(useCard);
+		$(".site-cover").fadeIn(500);
+		
+		
 
 		requestData.commandLine = "preGameBuild";
 		contactPHP(requestData, buildTownList);
@@ -46,11 +48,13 @@ $(function ()
 
 	function buildTownList(townData)
 	{
+		$(".pop-up.pre-game").show(500);
+		$(".site-cover").fadeIn(500);
 		// console.log("townData" + townData);
 		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
 		// console.log("townData.towns[0].type: " + townData.towns[0].type);
 		// console.log("townData.towns.length: ", townData.towns.length);
-
+		$(".pop-up.pre-game .town-list").empty();
 		for (var i = 0; i < townData.towns.length; i++)
 		{
 			var newTown = $("<section>");
@@ -308,7 +312,7 @@ $(function ()
 
 	function buildPlayerDisplays(players)
 	{
-		$(".cards-on-hand").html("");
+		$(".cards-on-hand").empty();
 		for (var i = 0; i < players.length; i++)
 		{
 			var playerNameAndTitle = players[i]["name"] + " the mayor of " + players[i]["town"]["name"] + " the " + players[i]["town"]["type"];
@@ -368,10 +372,18 @@ $(function ()
 		{
 			console.log("targetSelf = false");
 			requestData.opponentIndex = card.data("opponentIndex");
+			pickTarget()
 		}
+
 			requestData.cardIndex = card.data("cardIndex");
 			requestData.commandLine = "useToolCard";
 			contactPHP(requestData, updateBoard);
+	}
+
+	function pickTarget()
+	{
+		$(".pop-up.pre-game").show(500);
+		$(".site-cover").fadeIn(500);
 	}
 
 	siteStartup();
