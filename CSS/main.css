@@ -80,6 +80,11 @@ div.button:active{
 	background-color: #000000;
 }
 
+.card-row {
+	padding: 0 0 5px;
+	border-bottom: 1px solid #000000;
+}
+
 .pop-up {
 	z-index: 15;
 	display: inline-block;
@@ -241,6 +246,10 @@ div.button:active{
 	background-color: #f3c64c;
 }
 
+.event-card .card-row:last-child{
+	border-bottom: 0;
+}
+
 .event-card h2{
 	border-bottom: 1px solid #000000;
 }
@@ -250,10 +259,7 @@ div.button:active{
 	margin: 0 5px 0 0;
 }
 
-.card-row {
-	padding: 0 0 5px;
-	border-bottom: 1px solid #000000;
-}
+
 
 
 .player-section{
