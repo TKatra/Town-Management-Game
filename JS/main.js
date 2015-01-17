@@ -2,9 +2,7 @@ $(function ()
 {
 	var requestData;
 	$("div.button.button-start-game").click(startGame);
-	// $("div.tool-card").click(cardOnClick);
 	$("div.button.button-restart-game").click(siteStartup);
-
 
 	function siteStartup()
 	{
@@ -22,12 +20,7 @@ $(function ()
 		$(".pop-up").hide();
 		$(".error-message").hide();
 		$(".site-cover").hide();
-
-		
-
 		$(".site-cover").fadeIn(500);
-		
-		
 
 		requestData.commandLine = "preGameBuild";
 		contactPHP(requestData, buildTownList);
@@ -51,10 +44,7 @@ $(function ()
 	{
 		$(".pop-up.pre-game").show(500);
 		$(".site-cover").fadeIn(500);
-		// console.log("townData" + townData);
-		// console.log("townData(JSON.stringify): " + JSON.stringify(townData));
-		// console.log("townData.towns[0].type: " + townData.towns[0].type);
-		// console.log("townData.towns.length: ", townData.towns.length);
+
 		$(".pop-up.pre-game .town-list").empty();
 		for (var i = 0; i < townData.towns.length; i++)
 		{
@@ -113,16 +103,8 @@ $(function ()
 		}
 		else
 		{
-			// console.log("Selected town index: ", $(".town-list-item.selected").data("index"));
 			townIndex = $(".town-list-item.selected").data("index");
 		}
-
-		// console.log("playerName: ", playerName);
-		// console.log("townName: ", townName);
-		// console.log("townIndex: ", townIndex);
-
-		// console.log("textBoxesValid: ", textBoxesValid);
-		// console.log("townSelectionValid: ", townSelectionValid);
 
 		if(textBoxesValid === true && townSelectionValid === true)
 		{
@@ -134,7 +116,6 @@ $(function ()
 			requestData.playerSettings.playerName = playerName;
 			requestData.playerSettings.townName = townName;
 			requestData.playerSettings.townIndex = townIndex;
-			// console.log("requestData: ", requestData);
 			contactPHP(requestData, updateBoard);
 		}
 		else 
@@ -185,7 +166,6 @@ $(function ()
 
 		for(var i = 0; i < toolCards.length; i++)
 		{
-			// toolCard = $("#tool-card-" + i);
 			newToolCard = $("<div>").addClass("tool-card");
 			newToolCard.data("cardIndex", i);
 			newToolCard.data("targetSelf", toolCards[i]["targetSelf"]);
@@ -205,57 +185,14 @@ $(function ()
 		}
 	}
 
-	
-
-	
-
 	function buildEventCardDisplay(eventCard)
 	{
 		var newEventCard = $(".event-card");
-		// var winCondition = display.find(".win-condition");
-		// var loseCondition = display.find(".lose-condition");
 		var descriptionRow = $("<section>").addClass("card-row");
-		// var startupEffect = display.find(".startup-effect");
-		// var winEffect = display.find(".win-effect");
-		// var loseEffect = display.find(".lose-effect");
+
 		newEventCard.empty();
 		newEventCard.append($("<h2>").text(eventCard["title"]));
 
-		//winCondition
-		
-
-		// winCondition.find(".condition-type").text(conditionTypeToText(eventCard["winCondition"]["conditionType"]));
-		// winCondition.find(".stats-type").attr({
-		// 	"src": "Images/" + eventCard["winCondition"]["statsType"] + ".png",
-		// 	"alt": eventCard["winCondition"]["statsType"],
-		// 	"title": eventCard["winCondition"]["statsType"]
-		// });
-
-		// if(eventCard["winCondition"]["conditionType"] != "highestOfPlayers" && eventCard["winCondition"]["conditionType"] != "lowestOfPlayers")
-		// {
-		// 	winCondition.find(".condition-value").text(eventCard["winCondition"]["value"]);
-		// }
-		// else
-		// {
-		// 	winCondition.find(".condition-value").text("");
-		// }
-		
-
-		//loseCondition
-		// loseCondition.find(".condition-type").text(conditionTypeToText(eventCard["loseCondition"]["conditionType"]));
-		// loseCondition.find(".stats-type").attr({
-		// 	"src": "Images/" + eventCard["loseCondition"]["statsType"] + ".png",
-		// 	"alt": eventCard["loseCondition"]["statsType"],
-		// 	"title": eventCard["loseCondition"]["statsType"]
-		// });
-		// if(eventCard["loseCondition"]["conditionType"] != "highestOfPlayers" && eventCard["loseCondition"]["conditionType"] != "lowestOfPlayers")
-		// {
-		// 	loseCondition.find(".condition-value").text(eventCard["loseCondition"]["value"]);
-		// }
-		// else
-		// {
-		// 	loseCondition.find(".condition-value").text("");
-		// }
 		newEventCard.append(buildCardConditionRow("Win Condition", eventCard["winCondition"]));
 		newEventCard.append(buildCardConditionRow("Lose Condition", eventCard["loseCondition"]));
 
@@ -266,31 +203,6 @@ $(function ()
 		descriptionRow.append($("<h3>").text("Description"));
 		descriptionRow.append($("<p>").text(eventCard["description"]));
 		newEventCard.append(descriptionRow);
-		// startupEffect.find(".food-value").text(eventCard["startupEffect"]["food"]);
-		// startupEffect.find(".happiness-value").text(eventCard["startupEffect"]["happiness"]);
-		// startupEffect.find(".money-value").text(eventCard["startupEffect"]["money"]);
-		// startupEffect.find(".education-value").text(eventCard["startupEffect"]["education"]);
-		// startupEffect.find(".military-value").text(eventCard["startupEffect"]["military"]);
-		// startupEffect.find(".population-value").text(eventCard["startupEffect"]["population"]);
-		// startupEffect.find(".cardsToRemove-value").text(eventCard["startupEffect"]["cardsToRemove"]);
-
-		// winEffect.find(".food-value").text(eventCard["winEffect"]["food"]);
-		// winEffect.find(".happiness-value").text(eventCard["winEffect"]["happiness"]);
-		// winEffect.find(".money-value").text(eventCard["winEffect"]["money"]);
-		// winEffect.find(".education-value").text(eventCard["winEffect"]["education"]);
-		// winEffect.find(".military-value").text(eventCard["winEffect"]["military"]);
-		// winEffect.find(".population-value").text(eventCard["winEffect"]["population"]);
-		// winEffect.find(".cardsToRemove-value").text(eventCard["winEffect"]["cardsToRemove"]);
-
-		// loseEffect.find(".food-value").text(eventCard["loseEffect"]["food"]);
-		// loseEffect.find(".happiness-value").text(eventCard["loseEffect"]["happiness"]);
-		// loseEffect.find(".money-value").text(eventCard["loseEffect"]["money"]);
-		// loseEffect.find(".education-value").text(eventCard["loseEffect"]["education"]);
-		// loseEffect.find(".military-value").text(eventCard["loseEffect"]["military"]);
-		// loseEffect.find(".population-value").text(eventCard["loseEffect"]["population"]);
-		// loseEffect.find(".cardsToRemove-value").text(eventCard["loseEffect"]["cardsToRemove"]);
-
-		// newEventCard.find(".description-value").text(eventCard["description"]);
 	}
 
 	function buildCardConditionRow(label, condition)
@@ -335,7 +247,6 @@ $(function ()
 
 		if (anyEffects === true)
 		{
-			// console.log("newRow: ", newRow);
 			return newEffectRow;
 		}
 		else
@@ -348,20 +259,18 @@ $(function ()
 	{
 		var newStat = $("<section>").addClass("stats");
 		var statText = camelCaseToNormalCase(statsType);
-		// console.log("newStat, at start: ", newStat);
+
 		newStat.append($("<img>").attr(
 			{
 				"src" : "Images/" + statsType + ".png",
 				"alt" : statText,
 				"title" : statText
 			}));
-		// console.log("newStat, after imege added: ", newStat);
 		if(value != 0)
 		{
-			// console.log("value:", value);
 			newStat.append($("<p>").text(value));
 		}
-		// console.log("newStat, before return: ", newStat);
+
 		return newStat;
 	}
 
@@ -408,10 +317,8 @@ $(function ()
 				display.find(".military-value").text(players[i]["town"]["military"]);
 				display.find(".population-value").text(players[i]["town"]["population"]);
 
-				// console.log("Computer - cards on hand: " ,players[i]["toolCardsInDeck"]);
 				for(var j = 0; j < players[i]["toolCardsInDeck"]; j++)//
 				{
-					// console.log("Shit stain");
 					var cardImage = $("<img>").attr(
 					{
 						"src" : "Images/cardOnHand.png",
@@ -420,7 +327,6 @@ $(function ()
 					});
 					display.find(".cards-on-hand").append(cardImage);
 				}
-
 				display.find(".name-value").text(playerNameAndTitle);
 			}
 		}
@@ -438,12 +344,6 @@ $(function ()
 
 	function useCard()
 	{
-		
-
-		
-
-
-
 		if(card.data("targetSelf") == true)
 		{
 			console.log("targetSelf = true");
