@@ -181,6 +181,7 @@ $(function ()
 		var cardSection = $(".player-card-section");
 		var newToolCard;
 		var descriptionRow;
+		cardSection.empty();
 
 		for(var i = 0; i < toolCards.length; i++)
 		{
@@ -217,10 +218,12 @@ $(function ()
 		// var startupEffect = display.find(".startup-effect");
 		// var winEffect = display.find(".win-effect");
 		// var loseEffect = display.find(".lose-effect");
-
+		newEventCard.empty();
 		newEventCard.append($("<h2>").text(eventCard["title"]));
 
-		// //winCondition
+		//winCondition
+		
+
 		// winCondition.find(".condition-type").text(conditionTypeToText(eventCard["winCondition"]["conditionType"]));
 		// winCondition.find(".stats-type").attr({
 		// 	"src": "Images/" + eventCard["winCondition"]["statsType"] + ".png",
@@ -238,7 +241,7 @@ $(function ()
 		// }
 		
 
-		// //loseCondition
+		//loseCondition
 		// loseCondition.find(".condition-type").text(conditionTypeToText(eventCard["loseCondition"]["conditionType"]));
 		// loseCondition.find(".stats-type").attr({
 		// 	"src": "Images/" + eventCard["loseCondition"]["statsType"] + ".png",
@@ -253,10 +256,8 @@ $(function ()
 		// {
 		// 	loseCondition.find(".condition-value").text("");
 		// }
-
-
-
-
+		newEventCard.append(buildCardConditionRow("Win Condition", eventCard["winCondition"]));
+		newEventCard.append(buildCardConditionRow("Lose Condition", eventCard["loseCondition"]));
 
 		newEventCard.append(buildCardEffectRow("Startup Effect", eventCard["startupEffect"]));
 		newEventCard.append(buildCardEffectRow("Win Effect", eventCard["winEffect"]));
@@ -292,6 +293,16 @@ $(function ()
 		// newEventCard.find(".description-value").text(eventCard["description"]);
 	}
 
+	function buildCardConditionRow(label, condition)
+	{
+		var newConditionRow = $("<section>").addClass("card-row");
+
+		newConditionRow.append($("<p>").text(conditionTypeToText(condition["conditionType"])));
+		newConditionRow.append(buildStats(condition["statsType"], condition["value"]));
+
+		return newConditionRow;
+	}
+
 	function conditionTypeToText(conditionType)
 	{
 		switch (conditionType)
@@ -310,22 +321,22 @@ $(function ()
 	function buildCardEffectRow(label, effects)
 	{
 		var anyEffects = false;
-		var newRow = $("<section>").addClass("card-row");
-		newRow.append($("<h3>").text(label));
+		var newEffectRow = $("<section>").addClass("card-row");
+		newEffectRow.append($("<h3>").text(label));
 
 		for(var effect in effects)
 		{
 			if (effects[effect] !== 0)
 			{
 				anyEffects = true;
-				newRow.append(buildStats(effect, effects[effect]));
+				newEffectRow.append(buildStats(effect, effects[effect]));
 			}
 		}
 
 		if (anyEffects === true)
 		{
 			// console.log("newRow: ", newRow);
-			return newRow;
+			return newEffectRow;
 		}
 		else
 		{
@@ -345,11 +356,11 @@ $(function ()
 				"title" : statText
 			}));
 		// console.log("newStat, after imege added: ", newStat);
-		// if(showValue === true)
-		// {
+		if(value != 0)
+		{
 			// console.log("value:", value);
 			newStat.append($("<p>").text(value));
-		// }
+		}
 		// console.log("newStat, before return: ", newStat);
 		return newStat;
 	}
