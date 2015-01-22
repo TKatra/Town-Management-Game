@@ -193,7 +193,10 @@ $(function ()
 		newEventCard.empty();
 		newEventCard.append($("<h2>").text(eventCard["title"]));
 
+		newEventCard.append($("<h3>").text("Win Condition"));
 		newEventCard.append(buildCardConditionRow("Win Condition", eventCard["winCondition"]));
+
+		newEventCard.append($("<h3>").text("Lose Condition"));
 		newEventCard.append(buildCardConditionRow("Lose Condition", eventCard["loseCondition"]));
 
 		newEventCard.append(buildCardEffectRow("Startup Effect", eventCard["startupEffect"]));
