@@ -23,7 +23,7 @@ $(function ()
 		$(".site-cover").fadeIn(500);
 
 		requestData.commandLine = "preGameBuild";
-		contactPHP(requestData, buildTownList);
+		contactPHP(requestData, showPreGamePopUp);
 	}
 
 	function contactPHP(request, successFunction)
@@ -40,12 +40,17 @@ $(function ()
 		});
 	}
 
-	function buildTownList(townData)
+	function showPreGamePopUp(data)
 	{
 		$(".pop-up.pre-game").show(500);
 		$(".site-cover").fadeIn(500);
 
 		$(".pop-up.pre-game .town-list").empty();
+		buildTownList(data);
+	}
+
+	function buildTownList(townData)
+	{
 		for (var i = 0; i < townData.towns.length; i++)
 		{
 			var newTown = $("<section>");
