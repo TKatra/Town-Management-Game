@@ -31,26 +31,3 @@ function siteStartup()
 	requestData.commandLine = "preGameBuild";
 	contactPHP(requestData, showPreGamePopUp);
 }
-
-
-
-function showPreGamePopUp(data)
-{
-	$(".pop-up.pre-game").show(500);
-	$(".site-cover").fadeIn(500);
-
-	$(".pop-up.pre-game .town-list").empty();
-	buildTownList(data);
-}
-
-
-
-
-
-function pickTarget()
-{
-	// $(".site-cover").fadeIn(500);
-	// $(".pop-up.use-card").show(500);
-	
-	// requestData.opponentIndex = ;
-}
